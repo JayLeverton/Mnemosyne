@@ -40,13 +40,12 @@ function App() {
 
   const [backgroundStats, setBackgroundStats] = useState({
     characterName: "Placeholder McGee",
-    race: "codeMonkey",
-    alignment: "Chaotic Good",
+    race: "Code Monkey",
+    alignment: "Lawful Good",
     background: "Procrastinator",
-    experiencePoints: {
-      current: 999,
-      max: 355000,
-    },
+    experiencePoints: 28,
+    classLevels: [{ Barbarian: 5 }, { Fighter: 1 }],
+    subclassLevels: {},
   });
 
   // Allow the user to add their own custom defined classes instead of constraining to a set list of classes.
@@ -54,10 +53,11 @@ function App() {
   // On click, the "+" button will give the user a field to type in what class and how many levels they wish to add.
   // There will also be a "-" button that similarly appears when the "Class Levels" field is selected, which will give the user a selection of
   // their class levels which they can increment or decrement.
-  const [levels, setLevels] = useState({
-    classLevels: {},
-    subclassLevels: {},
-  });
+
+  // const [levels, setLevels] = useState({
+  //   classLevels: {},
+  //   subclassLevels: {},
+  // });
 
   const proficiencyStates = {
     0: "none",
@@ -143,31 +143,35 @@ function App() {
     <proficiencyStatesContext.Provider value={{ proficiencyStates }}>
       <combatStatsContext.Provider value={{ combatStats, setCombatStats }}>
         {/* <userModsContext.Provider value={{ userMods, setUserMods }}> */}
-        <proficienciesContext.Provider
-          value={{ proficiencies, setProficiencies }}
+        <backgroundStatsContext.Provider
+          value={{ backgroundStats, setBackgroundStats }}
         >
-          <abilityScoresContext.Provider
-            value={{ abilityScores, setAbilityScores }}
+          <proficienciesContext.Provider
+            value={{ proficiencies, setProficiencies }}
           >
-            <diceRollerVisibilityContext.Provider
-              value={{
-                diceRollerVisible,
-                setDiceRollerFalse,
-                setDiceRollerTrue,
-              }}
+            <abilityScoresContext.Provider
+              value={{ abilityScores, setAbilityScores }}
             >
-              <div className="min-h-full w-full">
-                <Overview></Overview>
-                {diceRollerVisible ? (
-                  <DiceRoller />
-                ) : (
-                  <OpenDiceRollerButton></OpenDiceRollerButton>
-                )}
-                <div className="py-6"></div>
-              </div>
-            </diceRollerVisibilityContext.Provider>
-          </abilityScoresContext.Provider>
-        </proficienciesContext.Provider>
+              <diceRollerVisibilityContext.Provider
+                value={{
+                  diceRollerVisible,
+                  setDiceRollerFalse,
+                  setDiceRollerTrue,
+                }}
+              >
+                <div className="min-h-full w-full">
+                  <Overview></Overview>
+                  {diceRollerVisible ? (
+                    <DiceRoller />
+                  ) : (
+                    <OpenDiceRollerButton></OpenDiceRollerButton>
+                  )}
+                  <div className="py-6"></div>
+                </div>
+              </diceRollerVisibilityContext.Provider>
+            </abilityScoresContext.Provider>
+          </proficienciesContext.Provider>
+        </backgroundStatsContext.Provider>
         {/* </userModsContext.Provider> */}
       </combatStatsContext.Provider>
     </proficiencyStatesContext.Provider>

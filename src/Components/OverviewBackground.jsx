@@ -1,4 +1,11 @@
+import { useContext } from "react";
+import { backgroundStatsContext } from "../Context";
+
 function OverviewBackground() {
+  const { backgroundStats, setBackgroundStats } = useContext(
+    backgroundStatsContext
+  );
+
   return (
     <div className="grid grid-cols-2 col-span-2">
       {/* OverviewBackground. Includes character name, class & level, OverviewBackground, player name, race, alignment, and experience points. */}
@@ -13,7 +20,17 @@ function OverviewBackground() {
           <div id="" className="text-center text-xs max-h-3 my-0.5">
             Character Name
           </div>
-          <div className="text-center">John Smith</div>
+
+          <input
+            className="flex w-full text-center bg-gray-500 border-[1px] rounded-b-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            value={backgroundStats.characterName}
+            onChange={(e) => {
+              setBackgroundStats({
+                ...backgroundStats,
+                characterName: e.target.value,
+              });
+            }}
+          />
         </div>
 
         <div
@@ -24,7 +41,16 @@ function OverviewBackground() {
             Race
           </div>
 
-          <div className="text-center">Bugbear</div>
+          <input
+            className="flex w-full text-center bg-gray-500 border-[1px] rounded-b-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            value={backgroundStats.race}
+            onChange={(e) => {
+              setBackgroundStats({
+                ...backgroundStats,
+                race: e.target.value,
+              });
+            }}
+          />
         </div>
 
         <div
@@ -35,7 +61,19 @@ function OverviewBackground() {
             Class Levels
           </div>
 
-          <div className="text-center">Barbarian 5 / Fighter 1</div>
+          {/*  */}
+          {/* I must create a modal dialog box to handle the inputting and subtraction of classes!
+              This modal must appear when the user taps the "Class Levels" field. */}
+          <input
+            className="flex w-full text-center bg-gray-500 border-[1px] rounded-b-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            value={backgroundStats.classLevels}
+            onChange={(e) => {
+              setBackgroundStats({
+                ...backgroundStats,
+                classLevels: e.target.value,
+              });
+            }}
+          />
         </div>
 
         <div
@@ -46,7 +84,16 @@ function OverviewBackground() {
             Alignment
           </div>
 
-          <div className="text-center">Chaotic Good</div>
+          <input
+            className="flex w-full text-center bg-gray-500 border-[1px] rounded-b-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            value={backgroundStats.alignment}
+            onChange={(e) => {
+              setBackgroundStats({
+                ...backgroundStats,
+                alignment: e.target.value,
+              });
+            }}
+          />
         </div>
 
         <div
@@ -57,7 +104,16 @@ function OverviewBackground() {
             Background
           </div>
 
-          <div className="text-center">Folk Hero</div>
+          <input
+            className="flex w-full text-center bg-gray-500 border-[1px] rounded-b-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            value={backgroundStats.background}
+            onChange={(e) => {
+              setBackgroundStats({
+                ...backgroundStats,
+                background: e.target.value,
+              });
+            }}
+          />
         </div>
 
         <div
@@ -68,7 +124,16 @@ function OverviewBackground() {
             Experience Points
           </div>
 
-          <div className="text-center">12345 / 99999</div>
+          <input
+            className="flex w-full text-center bg-gray-500 border-[1px] rounded-b-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            value={backgroundStats.experiencePoints}
+            onChange={(e) => {
+              setBackgroundStats({
+                ...backgroundStats,
+                experiencePoints: e.target.value,
+              });
+            }}
+          />
         </div>
       </div>
     </div>
