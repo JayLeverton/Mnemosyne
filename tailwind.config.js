@@ -21,6 +21,7 @@ export default {
     'bg-brown-500',
     // All possible statColor values
   ],
+  purge: ['./src/**/*.{js,jsx,ts,tsx}', './public/index.html'],
   theme: {
     extend: {},
   },
