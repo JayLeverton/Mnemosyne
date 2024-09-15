@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import Overview from "./Pages/Overview";
 import {
   abilityScoresContext,
@@ -9,20 +9,16 @@ import {
   proficienciesContext,
   userModsContext,
   diceRollerVisibilityContext,
+  diceRollInstancesContext,
 } from "./Context";
 
-import ProfSVG from "./Components/SVGs/ProfSVG";
-import ExpertiseSVG from "./Components/SVGs/ExpertiseSVG";
-import JoatSVG from "./Components/SVGs/JoatSVG";
-import Strength from "./Components/Stat";
-import ProficiencyBox from "./Components/ProficiencyBox";
 import DiceRoller from "./Components/DiceRoller";
 import OpenDiceRollerButton from "./Components/OpenDiceRollerButton";
 
 function App() {
   const [abilityScores, setAbilityScores] = useState({
     Strength: 7,
-    Dexterity: 9,
+    Dexterity: 10,
     Constitution: 12,
     Intelligence: 15,
     Wisdom: 20,
@@ -48,6 +44,7 @@ function App() {
     subclassLevels: {},
   });
 
+  //
   // Allow the user to add their own custom defined classes instead of constraining to a set list of classes.
   // This will be done with the use of a "+" button popup once the user has clicked/selected the "Class Levels" field.
   // On click, the "+" button will give the user a field to type in what class and how many levels they wish to add.
@@ -59,6 +56,8 @@ function App() {
   //   subclassLevels: {},
   // });
 
+  //
+  // States in which each proficiency can exist in
   const proficiencyStates = {
     0: "none",
     1: "proficiency",
@@ -66,6 +65,7 @@ function App() {
     3: "jackOfAllTrades",
   };
 
+  //
   // Save & Skill proficiencies
   const [proficiencies, setProficiencies] = useState({
     "Strength Save": proficiencyStates[1],
@@ -95,6 +95,7 @@ function App() {
     Persuasion: proficiencyStates[2],
   });
 
+  //
   // User Modifiers
   const [userMods, setUserMods] = useState({
     Strength: 0,
@@ -124,14 +125,9 @@ function App() {
     spellAtt: 0,
   });
 
-  // const proficiencyImages = {
-  //   proficiency: <ProfSVG></ProfSVG>,
-  //   expertise: <ExpertiseSVG></ExpertiseSVG>,
-  //   jackOfAllTrades: <JoatSVG></JoatSVG>,
-  // };
-
+  //
+  // Dice roller visibility
   const [diceRollerVisible, setDiceRollerVisible] = useState(false);
-
   const setDiceRollerFalse = () => {
     setDiceRollerVisible(false);
   };
@@ -139,42 +135,52 @@ function App() {
     setDiceRollerVisible(true);
   };
 
+  //
+  // Dice roller instances
+  let [diceRollInstances, setDiceRollInstances] = useState([]);
+
+  //
+  // Rendered
   return (
-    <proficiencyStatesContext.Provider value={{ proficiencyStates }}>
-      <combatStatsContext.Provider value={{ combatStats, setCombatStats }}>
-        {/* <userModsContext.Provider value={{ userMods, setUserMods }}> */}
-        <backgroundStatsContext.Provider
-          value={{ backgroundStats, setBackgroundStats }}
-        >
-          <proficienciesContext.Provider
-            value={{ proficiencies, setProficiencies }}
+    <diceRollInstancesContext.Provider
+      value={{ diceRollInstances, setDiceRollInstances }}
+    >
+      <proficiencyStatesContext.Provider value={{ proficiencyStates }}>
+        <combatStatsContext.Provider value={{ combatStats, setCombatStats }}>
+          {/* <userModsContext.Provider value={{ userMods, setUserMods }}> */}
+          <backgroundStatsContext.Provider
+            value={{ backgroundStats, setBackgroundStats }}
           >
-            <abilityScoresContext.Provider
-              value={{ abilityScores, setAbilityScores }}
+            <proficienciesContext.Provider
+              value={{ proficiencies, setProficiencies }}
             >
-              <diceRollerVisibilityContext.Provider
-                value={{
-                  diceRollerVisible,
-                  setDiceRollerFalse,
-                  setDiceRollerTrue,
-                }}
+              <abilityScoresContext.Provider
+                value={{ abilityScores, setAbilityScores }}
               >
-                <div className="min-h-full w-full">
-                  <Overview></Overview>
-                  {diceRollerVisible ? (
-                    <DiceRoller />
-                  ) : (
-                    <OpenDiceRollerButton></OpenDiceRollerButton>
-                  )}
-                  <div className="py-6"></div>
-                </div>
-              </diceRollerVisibilityContext.Provider>
-            </abilityScoresContext.Provider>
-          </proficienciesContext.Provider>
-        </backgroundStatsContext.Provider>
-        {/* </userModsContext.Provider> */}
-      </combatStatsContext.Provider>
-    </proficiencyStatesContext.Provider>
+                <diceRollerVisibilityContext.Provider
+                  value={{
+                    diceRollerVisible,
+                    setDiceRollerFalse,
+                    setDiceRollerTrue,
+                  }}
+                >
+                  <div className="min-h-full w-full">
+                    <Overview></Overview>
+                    {diceRollerVisible ? (
+                      <DiceRoller />
+                    ) : (
+                      <OpenDiceRollerButton></OpenDiceRollerButton>
+                    )}
+                    <div className="py-6"></div>
+                  </div>
+                </diceRollerVisibilityContext.Provider>
+              </abilityScoresContext.Provider>
+            </proficienciesContext.Provider>
+          </backgroundStatsContext.Provider>
+          {/* </userModsContext.Provider> */}
+        </combatStatsContext.Provider>
+      </proficiencyStatesContext.Provider>
+    </diceRollInstancesContext.Provider>
   );
 }
 

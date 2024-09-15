@@ -6,38 +6,87 @@ import {
   proficienciesContext,
   combatStatsContext,
   diceRollerVisibilityContext,
+  diceRollInstancesContext,
   // userModsContext,
 } from "../Context";
-import ProfSVG from "./SVGs/ProfSVG";
-import ExpertiseSVG from "./SVGs/ExpertiseSVG";
-import JoatSVG from "./SVGs/JoatSVG";
+
 import ProficiencyBox from "./ProficiencyBox";
-import DiceRoller from "./DiceRoller";
 
 function Stat({ stat, subStats, statColor }) {
-  
   const { abilityScores, setAbilityScores } = useContext(abilityScoresContext);
   const { proficiencies, setProficiencies } = useContext(proficienciesContext);
   const { combatStats, setCombatStats } = useContext(combatStatsContext);
   const { setDiceRollerFalse, setDiceRollerTrue } = useContext(
     diceRollerVisibilityContext
   );
+  const { diceRollInstances, setDiceRollInstances } = useContext(
+    diceRollInstancesContext
+  );
+
   // const { userMods, setUserMods } = useContext(userModsContext);
 
   const scoreModifier = Math.floor((abilityScores[stat] - 10) / 2);
+
+  const addToRollsArray = (rollType, result, formula) => {};
+
+  const rollXSidedDice = (x) => {
+    return Math.floor(Math.random() * x) + 1;
+  };
+
+  // const getRollInstanceString = () => {
+  //   let tempRoll = rollXSidedDice(20);
+  //   let tempRollFormula = `${tempRoll} + ${scoreModifier}`;
+  //   let scoreModifierString =
+  //     scoreModifier >= 0 ? `+${scoreModifier}` : `${scoreModifier}`;
+  //   return (
+  //     stat +
+  //     ": " +
+  //     (tempRoll + scoreModifier) +
+  //     " [" +
+  //     "" +
+  //     tempRoll +
+  //     "] " +
+  //     scoreModifierString.replaceAll(/([+\-])(\d)/g, `$1 $2`)
+  //   );
+  // };
+
+  const addDiceRollInstance = (rollType, result, tempRoll, scoreModifier) => {
+    setDiceRollInstances((prevInstances) => [
+      { rollType, result, tempRoll, scoreModifier },
+      ...prevInstances,
+    ]);
+  };
+
+  const handleScoreClick = () => {
+    setDiceRollerTrue();
+    // console.log(getRollInstanceString());
+
+    let scoreModifierString =
+      scoreModifier >= 0 ? `+${scoreModifier}` : `${scoreModifier}`;
+
+    let tempRoll = rollXSidedDice(20);
+    let tempRollFormula = `${tempRoll} + ${scoreModifier}`;
+    addDiceRollInstance(
+      stat,
+      tempRoll + scoreModifier,
+      tempRoll,
+      scoreModifier
+    );
+  };
 
   return (
     // Root Container
     <div
       className={`grid grid-cols-10 col-span-2 bg-${statColor}-500 rounded-lg shadow-xl min-h-[50px]`}
     >
+      {" "}
       {/*  */}
       {/* Strength Score container */}
       <div
         className={`grid col-span-2 bg-${statColor}-600 rounded-lg shadow-xl min-h-[50px] m-1 max-h-[5rem]`}
       >
         <button
-          onClick={setDiceRollerTrue}
+          onClick={handleScoreClick}
           className="border-2 rounded-lg rounded-b-none"
         >
           <div id="" className="text-center text-xs max-h-3 my-1">
@@ -102,34 +151,9 @@ function Stat({ stat, subStats, statColor }) {
                   return skillTotal > 0 ? `+${skillTotal}` : skillTotal;
                 })()}
               ></input>
-
-              {/*  value={
-                     combatStats.profBonus === 0
-                     ? ""
-                     : combatStats.profBonus > 0
-                     ? `+${combatStats.profBonus}`
-                     : combatStats.profBonus
-                 } */}
             </div>
           </div>
         ))}
-
-        {/* Athletics */}
-        {/* <div
-          className={`grid grid-rows-subgrid grid-cols-10 grid-flow-col row-span-1 col-span-8 bg-${statColor}-700 rounded-lg shadow-xl min-h-[50px] m-1`}
-        >
-          <ProficiencyBox parentProf="athletics"></ProficiencyBox>
-
-          <div className="grid col-span-7 mx-2 my-auto">Athletics</div>
-          <div
-            className={`grid col-span-3 text-center bg-${statColor}-800 rounded-r-lg`}
-          >
-            <input
-              className="flex w-full rounded-r-lg text-center focus:outline-none focus:ring-2 focus:ring-blue-500"
-              type="number"
-            ></input>
-          </div>
-        </div> */}
       </div>
     </div>
   );
