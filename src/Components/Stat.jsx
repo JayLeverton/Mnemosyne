@@ -59,9 +59,8 @@ function Stat({ stat, subStats, statColor }) {
 
   const handleScoreClick = () => {
     setDiceRollerTrue();
-
     let tempRoll = rollXSidedDice(20);
-    let tempRollFormula = `${tempRoll} + ${scoreModifier}`;
+
     addDiceRollInstance(
       stat,
       tempRoll + scoreModifier,
@@ -72,14 +71,10 @@ function Stat({ stat, subStats, statColor }) {
 
   const handleSkillClick = () => {
     setDiceRollerTrue();
-
-    let scoreModifierString =
-      scoreModifier >= 0 ? `+${scoreModifier}` : `${scoreModifier}`;
-
     let tempRoll = rollXSidedDice(20);
-    let tempRollFormula = `${tempRoll} + ${scoreModifier}`;
+
     addDiceRollInstance(
-      stat,
+      subStats,
       tempRoll + scoreModifier,
       tempRoll,
       scoreModifier
@@ -131,7 +126,7 @@ function Stat({ stat, subStats, statColor }) {
         {/* Saving Throw */}
         {subStats.map((stat) => (
           <div
-            className={`grid grid-rows-subgrid grid-cols-10 grid-flow-col row-span-1 col-span-8 bg-${statColor}-700 rounded-lg shadow-xl min-h-[50px] m-1 border-dotted border-b-2 border-red-950`}
+            className={`grid grid-rows-subgrid grid-cols-10 grid-flow-col row-span-1 col-span-8 bg-${statColor}-600 rounded-lg shadow-xl min-h-[50px] m-1 border-dotted border-b-2 border-red-950`}
             key={stat}
           >
             <ProficiencyBox parentProf={`${stat}`}></ProficiencyBox>
@@ -139,7 +134,7 @@ function Stat({ stat, subStats, statColor }) {
             <div className="grid col-span-7 mx-2 my-auto">{stat}</div>
 
             <div
-              className={`grid col-span-3 text-center bg-${statColor}-800 rounded-r-lg`}
+              className={`grid col-span-3 text-center bg-${statColor}-700 rounded-r-lg`}
             >
               <input
                 className="flex w-full rounded-rLg text-center focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-r-lg"
