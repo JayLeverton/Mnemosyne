@@ -147,7 +147,6 @@ function Stat({ stat, subStats, statColor }) {
             >
               <input
                 className="flex w-full text-center focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-r-lg"
-                // type="number"
                 onChange={(e) => {
                   setAbilityScores({
                     ...abilityScores,

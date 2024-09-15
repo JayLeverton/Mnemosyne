@@ -151,31 +151,35 @@ function App() {
           <backgroundStatsContext.Provider
             value={{ backgroundStats, setBackgroundStats }}
           >
-            <proficienciesContext.Provider
-              value={{ proficiencies, setProficiencies }}
+            <combatStatsContext.Provider
+              value={{ combatStats, setCombatStats }}
             >
-              <abilityScoresContext.Provider
-                value={{ abilityScores, setAbilityScores }}
+              <proficienciesContext.Provider
+                value={{ proficiencies, setProficiencies }}
               >
-                <diceRollerVisibilityContext.Provider
-                  value={{
-                    diceRollerVisible,
-                    setDiceRollerFalse,
-                    setDiceRollerTrue,
-                  }}
+                <abilityScoresContext.Provider
+                  value={{ abilityScores, setAbilityScores }}
                 >
-                  <div className="min-h-full w-full">
-                    <Overview></Overview>
-                    {diceRollerVisible ? (
-                      <DiceRoller />
-                    ) : (
-                      <OpenDiceRollerButton></OpenDiceRollerButton>
-                    )}
-                    <div className="py-6"></div>
-                  </div>
-                </diceRollerVisibilityContext.Provider>
-              </abilityScoresContext.Provider>
-            </proficienciesContext.Provider>
+                  <diceRollerVisibilityContext.Provider
+                    value={{
+                      diceRollerVisible,
+                      setDiceRollerFalse,
+                      setDiceRollerTrue,
+                    }}
+                  >
+                    <div className="min-h-full w-full">
+                      <Overview></Overview>
+                      {diceRollerVisible ? (
+                        <DiceRoller />
+                      ) : (
+                        <OpenDiceRollerButton></OpenDiceRollerButton>
+                      )}
+                      <div className="py-6"></div>
+                    </div>
+                  </diceRollerVisibilityContext.Provider>
+                </abilityScoresContext.Provider>
+              </proficienciesContext.Provider>
+            </combatStatsContext.Provider>
           </backgroundStatsContext.Provider>
           {/* </userModsContext.Provider> */}
         </combatStatsContext.Provider>
