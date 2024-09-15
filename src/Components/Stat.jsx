@@ -69,16 +69,22 @@ function Stat({ stat, subStats, statColor }) {
     );
   };
 
-  const handleSkillClick = () => {
+  // return skillTotal > 0 ? `+${skillTotal}` : skillTotal;
+
+  const handleSkillClick = (stat) => {
     setDiceRollerTrue();
     let tempRoll = rollXSidedDice(20);
 
-    addDiceRollInstance(
-      subStats,
-      tempRoll + scoreModifier,
-      tempRoll,
-      scoreModifier
-    );
+    const skillTotal =
+      proficiencies[stat] === "proficiency"
+        ? combatStats.profBonus + scoreModifier
+        : proficiencies[stat] === "expertise"
+        ? combatStats.profBonus * 2 + scoreModifier
+        : proficiencies[stat] === "jackOfAllTrades"
+        ? Math.floor(combatStats.profBonus / 2) + scoreModifier
+        : scoreModifier;
+
+    addDiceRollInstance(stat, tempRoll + skillTotal, tempRoll, skillTotal);
   };
 
   return (
@@ -86,8 +92,6 @@ function Stat({ stat, subStats, statColor }) {
     <div
       className={`grid grid-cols-10 col-span-2 bg-${statColor}-500 rounded-lg shadow-xl min-h-[50px]`}
     >
-      {" "}
-      {/*  */}
       {/* Strength Score container */}
       <div
         className={`grid col-span-2 bg-${statColor}-600 rounded-lg shadow-xl min-h-[50px] m-1 max-h-[5rem]`}
@@ -119,25 +123,30 @@ function Stat({ stat, subStats, statColor }) {
       {/*  */}
       {/*  */}
       {/*  */}
-      {/* Stat skills / save container */}
+      {/* Skills / save container */}
       <div
-        className={`grid grid-rows-2 col-span-8 bg-${statColor}-500 rounded-lg min-h-[50px] m-1`}
+        className={`grid grid-rows-2 col-span-8 rounded-lg min-h-[50px] m-1 gap-1`}
       >
-        {/* Saving Throw */}
+        {/* Saving Throws and Skills */}
         {subStats.map((stat) => (
           <div
-            className={`grid grid-rows-subgrid grid-cols-10 grid-flow-col row-span-1 col-span-8 bg-${statColor}-600 rounded-lg shadow-xl min-h-[50px] m-1 border-dotted border-b-2 border-red-950`}
+            className={`text-left grid grid-rows-subgrid grid-cols-10 grid-flow-col row-span-1 col-span-8 bg-${statColor}-600 rounded-lg shadow-xl min-h-[50px] border-dotted border-b-2 border-red-950`}
             key={stat}
           >
             <ProficiencyBox parentProf={`${stat}`}></ProficiencyBox>
 
-            <div className="grid col-span-7 mx-2 my-auto">{stat}</div>
+            <button
+              className="grid col-span-7 mx-2 my-auto text-left"
+              onClick={() => handleSkillClick(stat)}
+            >
+              {stat}
+            </button>
 
             <div
-              className={`grid col-span-3 text-center bg-${statColor}-700 rounded-r-lg`}
+              className={`grid h-full col-span-3 text-center bg-${statColor}-700 rounded-r-lg`}
             >
               <input
-                className="flex w-full rounded-rLg text-center focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-r-lg"
+                className="flex w-full text-center focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-r-lg"
                 // type="number"
                 onChange={(e) => {
                   setAbilityScores({
