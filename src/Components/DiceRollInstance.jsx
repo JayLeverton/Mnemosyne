@@ -9,7 +9,15 @@ function DiceRollInstance({ rollType, result, tempRoll, scoreModifier }) {
       <i className="whitespace-pre-wrap">{rollType}: </i>
       {/*  */}
       {/* Dice roll totalled */}
-      <b className={tempRoll == 20 ? "text-green-600" : "text-white"}>
+      <b
+        className={
+          tempRoll == 20
+            ? "text-green-600"
+            : tempRoll == 1
+            ? "text-red-500"
+            : "text-white"
+        }
+      >
         {result}
       </b>
       {/*  */}
@@ -21,6 +29,8 @@ function DiceRollInstance({ rollType, result, tempRoll, scoreModifier }) {
         className={
           tempRoll == 20
             ? "whitespace-pre-wrap text-green-600"
+            : tempRoll == 1
+            ? "whitespace-pre-wrap text-red-500"
             : "whitespace-pre-wrap text-white"
         }
       >

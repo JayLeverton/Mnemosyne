@@ -59,7 +59,19 @@ function Stat({ stat, subStats, statColor }) {
 
   const handleScoreClick = () => {
     setDiceRollerTrue();
-    // console.log(getRollInstanceString());
+
+    let tempRoll = rollXSidedDice(20);
+    let tempRollFormula = `${tempRoll} + ${scoreModifier}`;
+    addDiceRollInstance(
+      stat,
+      tempRoll + scoreModifier,
+      tempRoll,
+      scoreModifier
+    );
+  };
+
+  const handleSkillClick = () => {
+    setDiceRollerTrue();
 
     let scoreModifierString =
       scoreModifier >= 0 ? `+${scoreModifier}` : `${scoreModifier}`;
