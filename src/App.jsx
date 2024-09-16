@@ -27,7 +27,8 @@ function App() {
 
   const [combatStats, setCombatStats] = useState({
     AC: 10,
-    HP: 10,
+    currentHP: 10,
+    maxHP: 50,
     profBonus: 3,
     speeds: { walking: 30, flying: 0, swimming: 0, burrowing: 0, misc: 0 },
     maxHitDie: { d6: 0, d8: 0, d10: 0, d12: 0 },
