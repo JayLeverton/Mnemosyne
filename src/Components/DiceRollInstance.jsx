@@ -3,46 +3,50 @@ function DiceRollInstance({ rollType, result, tempRoll, scoreModifier }) {
     scoreModifier < 0 ? `- ${Math.abs(scoreModifier)}` : `+ ${scoreModifier}`;
 
   return (
-    <div className="flex bg-slate-700 w-full h-8 min-h-8 pl-2 border-t-[1px] first:rounded-b-xl last:rounded-t-xl pt-1">
+    <div className="flex text-sm text-wrap bg-slate-700 w-full h-auto pl-2 border-t-[1px] first:rounded-b-xl last:rounded-t-xl pt-1">
       {/*  */}
-      {/* Stat label */}
-      <i className="whitespace-pre-wrap">{rollType}: </i>
-      {/*  */}
-      {/* Dice roll totalled */}
-      <b
-        className={
-          tempRoll == 20
-            ? "text-green-600"
-            : tempRoll == 1
-            ? "text-red-500"
-            : "text-white"
-        }
-      >
-        {result}
-      </b>
-      {/*  */}
-      {/* Prepending bracket */}
-      <p className="whitespace-pre-wrap text-gray-300">{" ["}</p>
-      {/*  */}
-      {/* Natural roll number */}
-      <p
-        className={
-          tempRoll == 20
-            ? "whitespace-pre-wrap text-green-600"
-            : tempRoll == 1
-            ? "whitespace-pre-wrap text-red-500"
-            : "whitespace-pre-wrap text-white"
-        }
-      >
-        {tempRoll}
-      </p>
-      {/*  */}
-      {/* Appending bracket */}
-      <p className="text-gray-300">{"]"}</p>
-      <p className="whitespace-pre-wrap  text-gray-300">
-        {" "}
-        {scoreModifierString}
-      </p>
+      {/* Stat label */}{" "}
+      <div className="min-h-8 my-auto pt-1">
+        <i className="whitespace-nowrap">{rollType}: </i>
+        {/*  */}
+        {/* Dice roll totalled */}
+        <b
+          className={
+            tempRoll == 20
+              ? "text-green-600"
+              : tempRoll == 1
+              ? "text-red-500"
+              : "text-white"
+          }
+        >
+          {result}
+        </b>
+        {/*  */}
+        {/* Prepending bracket */}
+        <span>
+          <span className="whitespace-pre-wrap text-gray-300">{" ["}</span>
+          {/*  */}
+          {/* Natural roll number */}
+          <span
+            className={
+              tempRoll == 20
+                ? "whitespace-pre-wrap text-wrap text-green-600"
+                : tempRoll == 1
+                ? "whitespace-pre-wrap text-wrap text-red-500"
+                : "whitespace-pre-wrap text-wrap text-white"
+            }
+          >
+            {tempRoll}
+          </span>
+          {/*  */}
+          {/* Appending bracket */}
+          <span className="text-gray-300">{"]"}</span>
+        </span>
+        <span className="whitespace-pre-wrap text-gray-300">
+          {" "}
+          {scoreModifierString}
+        </span>
+      </div>
     </div>
   );
 }

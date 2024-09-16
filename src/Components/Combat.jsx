@@ -117,6 +117,7 @@ function Combat() {
         <input
           className="text-center w-full h-full rounded-b-lg"
           type="number"
+          max="99"
           value={combatStats.profBonus}
           onChange={(e) => {
             const value = e.target.value;

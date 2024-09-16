@@ -142,9 +142,7 @@ function Stat({ stat, subStats, statColor }) {
               {stat}
             </button>
 
-            <div
-              className={`grid h-full col-span-3 text-center bg-${statColor}-700 rounded-r-lg`}
-            >
+            <div className={`grid h-full col-span-3 text-center rounded-r-lg`}>
               <input
                 className="flex w-full text-center focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-r-lg"
                 onChange={(e) => {
