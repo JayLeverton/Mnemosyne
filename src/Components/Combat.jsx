@@ -5,7 +5,7 @@ function Combat() {
   const { combatStats, setCombatStats } = useContext(combatStatsContext);
 
   return (
-    <div className="grid grid-rows-4 grid-flow-col-dense grid-cols-6 col-span-2 bg-white rounded-lg shadow-xl min-h-[50px]">
+    <div className="grid grid-rows-4 grid-flow-col-dense grid-cols-6 col-span-2 rounded-lg shadow-xl min-h-[50px]">
       <div className="grid h-auto row-start-1 col-span-2 bg-red-700 rounded-lg shadow-xl m-1">
         <div id="" className="text-center text-xs max-h-3 my-0.5">
           Initiative
@@ -71,19 +71,21 @@ function Combat() {
         </div>
       </div> */}
 
-      <div className="grid row-start-3 col-start-2 align-middle row-span-2 col-span-4 grid-cols-3 grid-rows-2 bg-red-700 rounded-lg shadow-xl m-1">
+      <div className="grid border-white border-[1px] row-start-3 col-start-2 align-middle row-span-2 col-span-4 grid-cols-3 grid-rows-2 bg-red-700 rounded-lg shadow-xl m-1">
         <div className="grid col-span-3 grid-cols-8">
-          <button className="col-span-3 border-[1px] rounded-tl-lg">-1</button>
+          <button className="col-span-3 border-r-[1px] border-b-[1px] rounded-tl-lg">
+            -1
+          </button>
           <div className="grid col-span-2 grid-rows-2 h-full">
             <div id="" className="col-start-1 text-center h-full text-lg">
               HP
             </div>
-            <div className="max-h-8 mx-auto">
+            <div className="flex max-h-8 mx-auto justify-center">
               <svg
                 viewBox="0 0 24 24"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
-                className="h-full"
+                className="flex h-full mx-auto"
               >
                 <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
                 <g
@@ -106,7 +108,9 @@ function Combat() {
               </svg>
             </div>
           </div>
-          <button className="col-span-3 border-[1px] rounded-tr-lg">+1</button>
+          <button className="col-span-3 border-l-[1px] border-b-[1px] rounded-tr-lg">
+            +1
+          </button>
         </div>
         <div className="grid grid-cols-7 col-span-3 grid-flow-col">
           <input

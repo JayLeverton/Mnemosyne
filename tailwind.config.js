@@ -82,6 +82,17 @@ export default {
     'bg-brown-800',
 
 
+    'bg-gray-100',
+    'bg-gray-200',
+    'bg-gray-300',
+    'bg-gray-400',
+    'bg-gray-500',
+    'bg-gray-600',
+    'bg-gray-700',
+    'bg-gray-800',
+    'bg-gray-900',
+    'bg-gray-950'
+
     // All possible statColor values
   ],
   theme: {

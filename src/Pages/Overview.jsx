@@ -15,7 +15,7 @@ function Overview() {
 
   return (
     // Container to encompass the overview
-    <div className="w-full grid grid-cols-2 gap-2 p-2 ">
+    <div className=" bg-gray-900 w-full grid grid-cols-2 gap-2 p-2 ">
       <OverviewBackground></OverviewBackground>
 
       {/* Combat stuff */}
