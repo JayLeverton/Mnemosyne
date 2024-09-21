@@ -1,13 +1,22 @@
-function DiceRollInstance({ rollType, result, tempRoll, scoreModifier }) {
+function DiceRollInstance({
+  rollType = "",
+  result = "",
+  tempRoll = [],
+  scoreModifier = "",
+}) {
   let scoreModifierString =
-    scoreModifier < 0 ? `- ${Math.abs(scoreModifier)}` : `+ ${scoreModifier}`;
+    scoreModifier === null
+      ? null
+      : scoreModifier < 0
+      ? `- ${Math.abs(scoreModifier)}`
+      : `+ ${scoreModifier}`;
 
   return (
     <div className="flex text-sm text-wrap bg-slate-700 w-full h-auto pl-2 border-t-[1px] first:rounded-b-xl last:rounded-t-xl pt-1">
       {/*  */}
       {/* Stat label */}{" "}
       <div className="min-h-8 my-auto pt-1">
-        <i className="whitespace-nowrap">{rollType}: </i>
+        <i className="whitespace-nowrap">{rollType ? `${rollType}: ` : null}</i>
         {/*  */}
         {/* Dice roll totalled */}
         <b
@@ -44,7 +53,7 @@ function DiceRollInstance({ rollType, result, tempRoll, scoreModifier }) {
         </span>
         <span className="whitespace-pre-wrap text-gray-300">
           {" "}
-          {scoreModifierString}
+          {scoreModifierString ? scoreModifierString : null}
         </span>
       </div>
     </div>
