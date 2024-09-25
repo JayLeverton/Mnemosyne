@@ -87,6 +87,20 @@ function Stat({ stat, subStats, statColor }) {
     addDiceRollInstance(stat, tempRoll + skillTotal, tempRoll, skillTotal);
   };
 
+  const clearFocus = (e) => {
+    if (e.key === "Enter") {
+      if (document.activeElement) {
+        document.activeElement.blur();
+      }
+    }
+  };
+
+  const selectContent = (e) => {
+    if (document.activeElement) {
+      e.target.select();
+    }
+  };
+
   return (
     // Root Container
     <div
@@ -118,6 +132,8 @@ function Stat({ stat, subStats, statColor }) {
               [stat]: e.target.value,
             });
           }}
+          onFocus={selectContent}
+          onKeyDown={clearFocus}
         />
       </div>
       {/*  */}
@@ -163,6 +179,7 @@ function Stat({ stat, subStats, statColor }) {
 
                   return skillTotal > 0 ? `+${skillTotal}` : skillTotal;
                 })()}
+                onKeyDown={clearFocus}
               ></input>
             </div>
           </div>

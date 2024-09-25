@@ -4,6 +4,33 @@ import { combatStatsContext } from "../Context";
 function Combat() {
   const { combatStats, setCombatStats } = useContext(combatStatsContext);
 
+  const incrementHP = () => {
+    setCombatStats((prevCombatStats) => ({
+      ...prevCombatStats,
+      currentHP: prevCombatStats.currentHP + 1,
+    }));
+  };
+  const decrementHP = () => {
+    setCombatStats((prevCombatStats) => ({
+      ...prevCombatStats,
+      currentHP: prevCombatStats.currentHP - 1,
+    }));
+  };
+
+  const clearFocus = (e) => {
+    if (e.key === "Enter") {
+      if (document.activeElement) {
+        document.activeElement.blur();
+      }
+    }
+  };
+
+  const selectContent = (e) => {
+    if (document.activeElement) {
+      e.target.select();
+    }
+  };
+
   return (
     <div className="grid h-auto grid-flow-col-dense grid-cols-6 col-span-2 rounded-lg shadow-xl">
       <div className="grid h-auto row-start-1 col-span-2 bg-red-700 rounded-lg shadow-xl m-1">
@@ -55,6 +82,8 @@ function Combat() {
               profBonus: value === `` ? null : parseInt(e.target.value),
             });
           }}
+          onFocus={selectContent}
+          onKeyDown={clearFocus}
         />
       </div>
 
@@ -71,21 +100,24 @@ function Combat() {
         </div>
       </div> */}
 
-      <div className="grid h-auto border-white border-[1px] row-start-3 col-start-2 align-middle row-span-2 col-span-4 grid-cols-3 grid-rows-2 bg-red-700 rounded-lg shadow-xl m-1">
+      <div className="grid max-w-96 place-self-center h-auto border-white border-[1px] row-start-3 col-start-2 align-middle row-span-2 col-span-4 grid-cols-3 grid-rows-2 bg-red-700 rounded-lg shadow-xl m-1">
         <div className="grid h-auto col-span-3 grid-cols-3 border-b-[1px]">
-          <button className="col-span-1 border-r-[1px] rounded-tl-lg">
+          <button
+            className="col-span-1 border-r-[1px] rounded-tl-lg"
+            onClick={decrementHP}
+          >
             -1
           </button>
-          <div className="grid col-span-1 grid-rows-2">
-            <div id="" className="col-start-1 text-center text-lg">
+          <div className="grid">
+            <div className="row-start-1 place-self-center pb-1 col-start-1 text-center text-lg">
               HP
             </div>
-            <div className="flex mx-auto justify-center">
+            <div className="grid h-14 place-self-center row-start-1 col-start-1">
               <svg
                 viewBox="0 0 24 24"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
-                className="flex h-full mx-auto"
+                className="h-full"
               >
                 <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
                 <g
@@ -108,12 +140,15 @@ function Combat() {
               </svg>
             </div>
           </div>
-          <button className="col-span-1 border-l-[1px] rounded-tr-lg">
+          <button
+            className="col-span-1 border-l-[1px] rounded-tr-lg"
+            onClick={incrementHP}
+          >
             +1
           </button>
         </div>
-        <div className="flex grid-cols-2 col-span-3 grid-flow-col">
-          <div className="flex flex-col h-auto grid-rows-2 text-center border-r-[1px] align-middle">
+        <div className="flex justify-between grid-cols-2 col-span-3 grid-flow-col">
+          <div className="flex flex-col  h-auto grid-rows-2 text-center border-r-[1px] align-middle">
             <div className="h-full my-auto max-h-6 text-sm text-center align-middle">
               Current
             </div>
@@ -122,6 +157,15 @@ function Combat() {
               className="text-center h-full w-full rounded-bl-lg"
               type="number"
               value={combatStats.currentHP}
+              onChange={(e) => {
+                const value = e.target.value;
+                setCombatStats({
+                  ...combatStats,
+                  currentHP: value === `` ? null : parseInt(e.target.value),
+                });
+              }}
+              onFocus={selectContent}
+              onKeyDown={clearFocus}
             />
           </div>
 
@@ -133,6 +177,15 @@ function Combat() {
               className="text-center h-full w-full rounded-br-lg"
               type="number"
               value={combatStats.maxHP}
+              onChange={(e) => {
+                const value = e.target.value;
+                setCombatStats({
+                  ...combatStats,
+                  maxHP: value === `` ? null : parseInt(e.target.value),
+                });
+              }}
+              onFocus={selectContent}
+              onKeyDown={clearFocus}
             />
           </div>
         </div>

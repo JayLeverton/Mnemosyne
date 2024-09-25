@@ -48,9 +48,11 @@ function DiceRoller() {
 
   const handleKeyDown = (e) => {
     if (e.key === "Enter") {
-      rollDice(tempRollFormula);
-      addNonStatDiceRollInstance();
-      clearTempRollFormula();
+      if (tempRollFormula != "") {
+        rollDice(tempRollFormula);
+        addNonStatDiceRollInstance();
+        clearTempRollFormula();
+      }
     }
   };
 
