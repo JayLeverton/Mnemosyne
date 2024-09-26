@@ -42,7 +42,7 @@ function DiceRollInstance({
                 ? "whitespace-pre-wrap text-wrap text-green-600"
                 : tempRoll == 1
                 ? "whitespace-pre-wrap text-wrap text-red-500"
-                : "whitespace-pre-wrap text-wrap text-white"
+                : "whitespace-pre-wrap text-wrap text-gray-300"
             }
           >
             {tempRoll}
