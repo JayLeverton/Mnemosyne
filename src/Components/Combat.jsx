@@ -55,14 +55,12 @@ function Combat() {
       </div>
 
       <div className="grid row-start-1 row-span-2 h-auto col-span-2 bg-red-700 rounded-lg shadow-xl m-1">
-        <div id="" className="text-center text-xs max-h-3 my-0.5">
-          Speeds
-        </div>
-        <div className="flex text-sm justify-between">
+        <div className="text-center text-xs max-h-3 my-0.5 mb-[0.55rem]">Speeds</div>
+        <div className="flex text-xs justify-between">
           <div className="text-left pl-1">Walk: </div>{" "}
           <form>
             <input
-              className="text-center w-full h-full max-w-10 rounded-t-lg"
+              className="text-center w-full h-full max-w-10"
               type="number"
               max="999"
               value={combatStats.speeds.walk}
@@ -81,7 +79,7 @@ function Combat() {
             />
           </form>
         </div>
-        <div className="flex text-sm justify-between">
+        <div className="flex text-xs justify-between">
           <div className="text-left pl-1">Fly: </div>{" "}
           <form>
             <input
@@ -104,7 +102,7 @@ function Combat() {
             />
           </form>
         </div>
-        <div className="flex text-sm justify-between">
+        <div className="flex text-xs justify-between">
           <div className="text-left pl-1">Swim: </div>{" "}
           <form>
             <input
@@ -127,7 +125,7 @@ function Combat() {
             />
           </form>
         </div>
-        <div className="flex text-sm justify-between">
+        <div className="flex text-xs justify-between">
           <div className="text-left pl-1">Climb: </div>{" "}
           <form>
             <input
@@ -150,7 +148,7 @@ function Combat() {
             />
           </form>
         </div>
-        <div className="flex text-sm justify-between">
+        <div className="flex text-xs justify-between">
           <div className="text-left pl-1">Burrow: </div>{" "}
           <form>
             <input
@@ -173,11 +171,11 @@ function Combat() {
             />
           </form>
         </div>
-        <div className="flex text-sm justify-between">
+        <div className="flex text-xs justify-between">
           <div className="text-left pl-1">Misc: </div>{" "}
           <form>
             <input
-              className="text-center w-full h-full max-w-10 rounded-b-lg"
+              className="text-center w-full h-full max-w-10 rounded-br-lg"
               type="number"
               max="999"
               value={combatStats.speeds.misc}

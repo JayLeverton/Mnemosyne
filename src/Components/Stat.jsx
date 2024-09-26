@@ -7,7 +7,7 @@ import {
   combatStatsContext,
   diceRollerVisibilityContext,
   diceRollInstancesContext,
-  // userModsContext,
+  userModsContext,
 } from "../Context";
 
 import ProficiencyBox from "./ProficiencyBox";

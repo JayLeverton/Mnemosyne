@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import Overview from "./Pages/Overview";
 import {
   abilityScoresContext,
@@ -16,34 +16,49 @@ import DiceRoller from "./Components/DiceRoller";
 import OpenDiceRollerButton from "./Components/OpenDiceRollerButton";
 
 function App() {
-  const [abilityScores, setAbilityScores] = useState({
-    Strength: 7,
-    Dexterity: 10,
-    Constitution: 12,
-    Intelligence: 15,
-    Wisdom: 20,
-    Charisma: 23,
+  const [abilityScores, setAbilityScores] = useState(() => {
+    const savedScores = localStorage.getItem("abilityScores");
+    return savedScores
+      ? JSON.parse(savedScores)
+      : {
+          Strength: 10,
+          Dexterity: 10,
+          Constitution: 10,
+          Intelligence: 10,
+          Wisdom: 10,
+          Charisma: 10,
+        };
   });
 
-  const [combatStats, setCombatStats] = useState({
-    initiative: 5,
-    AC: 15,
-    currentHP: 10,
-    maxHP: 50,
-    profBonus: 3,
-    speeds: { walk: 30, fly: 0, swim: 0, climb: 0, burrow: 0, misc: 0 },
-    maxHitDie: { d6: 0, d8: 0, d10: 0, d12: 0 },
-    currentHitDie: { d6: 0, d8: 0, d10: 0, d12: 0 },
+  const [combatStats, setCombatStats] = useState(() => {
+    const savedStats = localStorage.getItem("combatStats");
+    return savedStats
+      ? JSON.parse(savedStats)
+      : {
+          initiative: 0,
+          AC: 10,
+          currentHP: 0,
+          maxHP: 0,
+          profBonus: 2,
+          speeds: { walk: 30, fly: 0, swim: 0, climb: 0, burrow: 0, misc: 0 },
+          maxHitDie: { d6: 0, d8: 0, d10: 0, d12: 0 },
+          currentHitDie: { d6: 0, d8: 0, d10: 0, d12: 0 },
+        };
   });
 
-  const [backgroundStats, setBackgroundStats] = useState({
-    characterName: "Placeholder McGee",
-    race: "Code Monkey",
-    alignment: "Lawful Good",
-    background: "Procrastinator",
-    experiencePoints: 28,
-    classLevels: [{ Barbarian: 5 }, { Fighter: 1 }],
-    subclassLevels: {},
+  const [backgroundStats, setBackgroundStats] = useState(() => {
+    const savedStats = localStorage.getItem("backgroundStats");
+    return savedStats
+      ? JSON.parse(savedStats)
+      : {
+          characterName: "Placeholder McGee",
+          race: "Code Monkey",
+          alignment: "Lawful Good",
+          background: "Procrastinator",
+          experiencePoints: 28,
+          classLevels: [{ Barbarian: 5 }, { Fighter: 1 }],
+          subclassLevels: {},
+        };
   });
 
   //
@@ -69,63 +84,159 @@ function App() {
 
   //
   // Save & Skill proficiencies
-  const [proficiencies, setProficiencies] = useState({
-    "Strength Save": proficiencyStates[1],
-    "Dexterity Save": proficiencyStates[1],
-    "Constitution Save": proficiencyStates[1],
-    "Intelligence Save": proficiencyStates[1],
-    "Wisdom Save": proficiencyStates[1],
-    "Charisma Save": proficiencyStates[1],
+  const [proficiencies, setProficiencies] = useState(() => {
+    const savedStats = localStorage.getItem("proficiencies");
+    return savedStats
+      ? JSON.parse(savedStats)
+      : {
+          "Strength Save": proficiencyStates[0],
+          "Dexterity Save": proficiencyStates[0],
+          "Constitution Save": proficiencyStates[0],
+          "Intelligence Save": proficiencyStates[0],
+          "Wisdom Save": proficiencyStates[0],
+          "Charisma Save": proficiencyStates[0],
 
-    Athletics: proficiencyStates[2],
-    Acrobatics: proficiencyStates[2],
-    "Sleight Of Hand": proficiencyStates[2],
-    Stealth: proficiencyStates[2],
-    Arcana: proficiencyStates[2],
-    History: proficiencyStates[2],
-    Investigation: proficiencyStates[2],
-    Nature: proficiencyStates[2],
-    Religion: proficiencyStates[2],
-    "Animal Handling": proficiencyStates[2],
-    Insight: proficiencyStates[2],
-    Medicine: proficiencyStates[2],
-    Perception: proficiencyStates[2],
-    Survival: proficiencyStates[2],
-    Deception: proficiencyStates[2],
-    Intimidation: proficiencyStates[2],
-    Performance: proficiencyStates[2],
-    Persuasion: proficiencyStates[2],
+          Athletics: proficiencyStates[0],
+          Acrobatics: proficiencyStates[0],
+          "Sleight Of Hand": proficiencyStates[0],
+          Stealth: proficiencyStates[0],
+          Arcana: proficiencyStates[0],
+          History: proficiencyStates[0],
+          Investigation: proficiencyStates[0],
+          Nature: proficiencyStates[0],
+          Religion: proficiencyStates[0],
+          "Animal Handling": proficiencyStates[0],
+          Insight: proficiencyStates[0],
+          Medicine: proficiencyStates[0],
+          Perception: proficiencyStates[0],
+          Survival: proficiencyStates[0],
+          Deception: proficiencyStates[0],
+          Intimidation: proficiencyStates[0],
+          Performance: proficiencyStates[0],
+          Persuasion: proficiencyStates[0],
+        };
   });
 
   //
   // User Modifiers
-  const [userMods, setUserMods] = useState({
-    Strength: 0,
-    Dexterity: 0,
-    Constitution: 0,
-    Intelligence: 0,
-    Wisdom: 0,
-    Charisma: 0,
-    AC: 0,
-    HP: 0,
-    profBonus: 0,
-    speeds: {
-      walking: 0,
-      flying: 0,
-      swimming: 0,
-      burrowing: 0,
-      misc: 0,
-    },
-    maxHitDie: {
-      d6: 0,
-      d8: 0,
-      d10: 0,
-      d12: 0,
-    },
-    initiative: 5,
-    spellSaveDC: 0,
-    spellAtt: 0,
+  const [userMods, setUserMods] = useState(() => {
+    const savedStats = localStorage.getItem("userMods");
+    return savedStats
+      ? JSON.parse(savedStats)
+      : {
+          Strength: 0,
+          Dexterity: 0,
+          Constitution: 0,
+          Intelligence: 0,
+          Wisdom: 0,
+          Charisma: 0,
+          AC: 0,
+          HP: 0,
+          profBonus: 0,
+          speeds: {
+            walking: 0,
+            flying: 0,
+            swimming: 0,
+            burrowing: 0,
+            misc: 0,
+          },
+          maxHitDie: {
+            d6: 0,
+            d8: 0,
+            d10: 0,
+            d12: 0,
+          },
+          initiative: 0,
+          spellSaveDC: 0,
+          spellAtt: 0,
+        };
   });
+
+  //
+  // Defaults
+  const defaultstats = {
+    defaultAbilityScores: {
+      Strength: 10,
+      Dexterity: 10,
+      Constitution: 10,
+      Intelligence: 10,
+      Wisdom: 10,
+      Charisma: 10,
+    },
+    defaultCombatStats: {
+      initiative: 0,
+      AC: 10,
+      currentHP: 0,
+      maxHP: 0,
+      profBonus: 2,
+      speeds: { walk: 30, fly: 0, swim: 0, climb: 0, burrow: 0, misc: 0 },
+      maxHitDie: { d6: 0, d8: 0, d10: 0, d12: 0 },
+      currentHitDie: { d6: 0, d8: 0, d10: 0, d12: 0 },
+    },
+    defaultBackgroundStats: {
+      characterName: "Placeholder McGee",
+      race: "Code Monkey",
+      alignment: "Lawful Good",
+      background: "Procrastinator",
+      experiencePoints: 10,
+      classLevels: [{ Barbarian: 5 }, { Fighter: 1 }],
+      subclassLevels: {},
+    },
+    defaultProficiencies: {
+      "Strength Save": proficiencyStates[0],
+      "Dexterity Save": proficiencyStates[0],
+      "Constitution Save": proficiencyStates[0],
+      "Intelligence Save": proficiencyStates[0],
+      "Wisdom Save": proficiencyStates[0],
+      "Charisma Save": proficiencyStates[0],
+
+      Athletics: proficiencyStates[0],
+      Acrobatics: proficiencyStates[0],
+      "Sleight Of Hand": proficiencyStates[0],
+      Stealth: proficiencyStates[0],
+      Arcana: proficiencyStates[0],
+      History: proficiencyStates[0],
+      Investigation: proficiencyStates[0],
+      Nature: proficiencyStates[0],
+      Religion: proficiencyStates[0],
+      "Animal Handling": proficiencyStates[0],
+      Insight: proficiencyStates[0],
+      Medicine: proficiencyStates[0],
+      Perception: proficiencyStates[0],
+      Survival: proficiencyStates[0],
+      Deception: proficiencyStates[0],
+      Intimidation: proficiencyStates[0],
+      Performance: proficiencyStates[0],
+      Persuasion: proficiencyStates[0],
+    },
+    defaultUserMods: {
+      Strength: 0,
+      Dexterity: 0,
+      Constitution: 0,
+      Intelligence: 0,
+      Wisdom: 0,
+      Charisma: 0,
+      AC: 0,
+      HP: 0,
+      profBonus: 0,
+      speeds: {
+        walking: 0,
+        flying: 0,
+        swimming: 0,
+        burrowing: 0,
+        misc: 0,
+      },
+      maxHitDie: {
+        d6: 0,
+        d8: 0,
+        d10: 0,
+        d12: 0,
+      },
+      initiative: 0,
+      spellSaveDC: 0,
+      spellAtt: 0,
+    },
+  };
 
   //
   // Dice roller visibility
@@ -140,6 +251,79 @@ function App() {
   //
   // Dice roller instances
   let [diceRollInstances, setDiceRollInstances] = useState([]);
+
+  //
+  // Manual saving
+  const save = () => {
+    console.log("Save!");
+    const data = {
+      abilityScores,
+      combatStats,
+      backgroundStats,
+      proficiencies,
+      userMods,
+    };
+    const jsonData = JSON.stringify(data, null, 2); // Pretty-print JSON with indentation
+    const blob = new Blob([jsonData], { type: "application/json" });
+
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "characterData.json"; // Filename for the download
+    a.click();
+
+    URL.revokeObjectURL(url);
+  };
+
+  //
+  // Manual loading
+  const load = (event) => {
+    console.log("Load!");
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        try {
+          const data = JSON.parse(e.target.result);
+
+          // Update the state with the loaded data
+          setAbilityScores(data.abilityScores || {});
+          setCombatStats(data.combatStats || {});
+          setBackgroundStats(data.backgroundStats || {});
+          setProficiencies(data.proficiencies || {});
+          setUserMods(data.userMods || {});
+        } catch (error) {
+          console.error("Error parsing JSON:", error);
+          alert(
+            "Failed to load the file. Please ensure it's a valid JSON file."
+          );
+        }
+      };
+      reader.readAsText(file);
+    }
+  };
+
+  //
+  // Local storage saving
+  useEffect(() => {
+    localStorage.setItem("abilityScores", JSON.stringify(abilityScores));
+  }, [abilityScores]);
+
+  useEffect(() => {
+    localStorage.setItem("combatStats", JSON.stringify(combatStats));
+  }, [combatStats]);
+
+  useEffect(() => {
+    localStorage.setItem("backgroundStats", JSON.stringify(backgroundStats));
+  }, [backgroundStats]);
+
+  useEffect(() => {
+    localStorage.setItem("proficiencies", JSON.stringify(proficiencies));
+  }, [proficiencies]);
+
+  useEffect(() => {
+    localStorage.setItem("userMods", JSON.stringify(userMods));
+  }, [userMods]);
 
   //
   // Rendered
@@ -162,23 +346,25 @@ function App() {
                 <abilityScoresContext.Provider
                   value={{ abilityScores, setAbilityScores }}
                 >
-                  <diceRollerVisibilityContext.Provider
-                    value={{
-                      diceRollerVisible,
-                      setDiceRollerFalse,
-                      setDiceRollerTrue,
-                    }}
-                  >
-                    <div className="min-h-full w-full">
-                      <Overview></Overview>
-                      {diceRollerVisible ? (
-                        <DiceRoller />
-                      ) : (
-                        <OpenDiceRollerButton></OpenDiceRollerButton>
-                      )}
-                      <div className="py-6"></div>
-                    </div>
-                  </diceRollerVisibilityContext.Provider>
+                  <userModsContext.Provider value={{ userMods, setUserMods }}>
+                    <diceRollerVisibilityContext.Provider
+                      value={{
+                        diceRollerVisible,
+                        setDiceRollerFalse,
+                        setDiceRollerTrue,
+                      }}
+                    >
+                      <div className="min-h-full w-full">
+                        <Overview save={save} load={load}></Overview>
+                        {diceRollerVisible ? (
+                          <DiceRoller />
+                        ) : (
+                          <OpenDiceRollerButton></OpenDiceRollerButton>
+                        )}
+                        <div className="py-6"></div>
+                      </div>
+                    </diceRollerVisibilityContext.Provider>
+                  </userModsContext.Provider>
                 </abilityScoresContext.Provider>
               </proficienciesContext.Provider>
             </combatStatsContext.Provider>

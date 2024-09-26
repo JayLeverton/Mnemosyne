@@ -1,9 +1,11 @@
+import { useContext } from "react";
 import Combat from "../Components/Combat";
 import DiceRoller from "../Components/DiceRoller";
 import OverviewBackground from "../Components/OverviewBackground";
+import SaveAndLoad from "../Components/SaveAndLoad";
 import Stat from "../Components/Stat";
 
-function Overview() {
+function Overview({ save, load }) {
   let statColours = {
     str: "red",
     dex: "blue",
@@ -16,6 +18,7 @@ function Overview() {
   return (
     // Container to encompass the overview
     <div className=" bg-gray-900 w-full grid grid-cols-2 gap-2 p-2 ">
+      <SaveAndLoad save={save} load={load}></SaveAndLoad>
       <OverviewBackground></OverviewBackground>
 
       {/* Combat stuff */}
