@@ -19,9 +19,8 @@ function Combat() {
 
   const clearFocus = (e) => {
     if (e.key === "Enter") {
-      if (document.activeElement) {
-        document.activeElement.blur();
-      }
+      e.preventDefault();
+      document.activeElement.blur();
     }
   };
 
@@ -34,19 +33,169 @@ function Combat() {
   return (
     <div className="grid h-auto grid-flow-col-dense grid-cols-6 col-span-2 rounded-lg shadow-xl">
       <div className="grid h-auto row-start-1 col-span-2 bg-red-700 rounded-lg shadow-xl m-1">
-        <div id="" className="text-center text-xs max-h-3 my-0.5">
-          Initiative
-        </div>
+        <div className="text-center text-xs max-h-3 my-0.5">Initiative</div>
 
-        <div className="text-center">+3</div>
+        <form>
+          <input
+            className="text-center w-full h-full rounded-b-lg"
+            type="number"
+            max="999"
+            value={combatStats.initiative}
+            onChange={(e) => {
+              const value = e.target.value;
+              setCombatStats({
+                ...combatStats,
+                initiative: value === "" ? null : parseInt(e.target.value),
+              });
+            }}
+            onFocus={selectContent}
+            onKeyDown={clearFocus}
+          />
+        </form>
       </div>
 
       <div className="grid row-start-1 row-span-2 h-auto col-span-2 bg-red-700 rounded-lg shadow-xl m-1">
         <div id="" className="text-center text-xs max-h-3 my-0.5">
-          Speed
+          Speeds
         </div>
-
-        <div className="text-center">40ft</div>
+        <div className="flex text-sm justify-between">
+          <div className="text-left pl-1">Walk: </div>{" "}
+          <form>
+            <input
+              className="text-center w-full h-full max-w-10 rounded-t-lg"
+              type="number"
+              max="999"
+              value={combatStats.speeds.walk}
+              onChange={(e) => {
+                const value = e.target.value;
+                setCombatStats({
+                  ...combatStats,
+                  speeds: {
+                    ...combatStats.speeds,
+                    walk: value === "" ? null : parseInt(e.target.value),
+                  },
+                });
+              }}
+              onFocus={selectContent}
+              onKeyDown={clearFocus}
+            />
+          </form>
+        </div>
+        <div className="flex text-sm justify-between">
+          <div className="text-left pl-1">Fly: </div>{" "}
+          <form>
+            <input
+              className="text-center w-full h-full max-w-10"
+              type="number"
+              max="999"
+              value={combatStats.speeds.fly}
+              onChange={(e) => {
+                const value = e.target.value;
+                setCombatStats({
+                  ...combatStats,
+                  speeds: {
+                    ...combatStats.speeds,
+                    fly: value === "" ? null : parseInt(e.target.value),
+                  },
+                });
+              }}
+              onFocus={selectContent}
+              onKeyDown={clearFocus}
+            />
+          </form>
+        </div>
+        <div className="flex text-sm justify-between">
+          <div className="text-left pl-1">Swim: </div>{" "}
+          <form>
+            <input
+              className="text-center w-full h-full max-w-10"
+              type="number"
+              max="999"
+              value={combatStats.speeds.swim}
+              onChange={(e) => {
+                const value = e.target.value;
+                setCombatStats({
+                  ...combatStats,
+                  speeds: {
+                    ...combatStats.speeds,
+                    swim: value === "" ? null : parseInt(e.target.value),
+                  },
+                });
+              }}
+              onFocus={selectContent}
+              onKeyDown={clearFocus}
+            />
+          </form>
+        </div>
+        <div className="flex text-sm justify-between">
+          <div className="text-left pl-1">Climb: </div>{" "}
+          <form>
+            <input
+              className="text-center w-full h-full max-w-10"
+              type="number"
+              max="999"
+              value={combatStats.speeds.climb}
+              onChange={(e) => {
+                const value = e.target.value;
+                setCombatStats({
+                  ...combatStats,
+                  speeds: {
+                    ...combatStats.speeds,
+                    climb: value === "" ? null : parseInt(e.target.value),
+                  },
+                });
+              }}
+              onFocus={selectContent}
+              onKeyDown={clearFocus}
+            />
+          </form>
+        </div>
+        <div className="flex text-sm justify-between">
+          <div className="text-left pl-1">Burrow: </div>{" "}
+          <form>
+            <input
+              className="text-center w-full h-full max-w-10"
+              type="number"
+              max="999"
+              value={combatStats.speeds.burrow}
+              onChange={(e) => {
+                const value = e.target.value;
+                setCombatStats({
+                  ...combatStats,
+                  speeds: {
+                    ...combatStats.speeds,
+                    burrow: value === "" ? null : parseInt(e.target.value),
+                  },
+                });
+              }}
+              onFocus={selectContent}
+              onKeyDown={clearFocus}
+            />
+          </form>
+        </div>
+        <div className="flex text-sm justify-between">
+          <div className="text-left pl-1">Misc: </div>{" "}
+          <form>
+            <input
+              className="text-center w-full h-full max-w-10 rounded-b-lg"
+              type="number"
+              max="999"
+              value={combatStats.speeds.misc}
+              onChange={(e) => {
+                const value = e.target.value;
+                setCombatStats({
+                  ...combatStats,
+                  speeds: {
+                    ...combatStats.speeds,
+                    misc: value === "" ? null : parseInt(e.target.value),
+                  },
+                });
+              }}
+              onFocus={selectContent}
+              onKeyDown={clearFocus}
+            />
+          </form>
+        </div>
       </div>
 
       <div className="grid h-auto row-start-1 col-span-2 bg-red-700 rounded-lg shadow-xl m-1">
@@ -54,7 +203,23 @@ function Combat() {
           AC
         </div>
 
-        <div className="text-center">16</div>
+        <form>
+          <input
+            className="text-center w-full h-full rounded-b-lg"
+            type="number"
+            max="99"
+            value={combatStats.AC}
+            onChange={(e) => {
+              const value = e.target.value;
+              setCombatStats({
+                ...combatStats,
+                AC: value === `` ? null : parseInt(e.target.value),
+              });
+            }}
+            onFocus={selectContent}
+            onKeyDown={clearFocus}
+          />
+        </form>
       </div>
 
       <div className="grid h-auto row-start-2 col-span-2 bg-red-700 rounded-lg shadow-xl m-1">
@@ -70,21 +235,23 @@ function Combat() {
           Prof. Bonus
         </div>
 
-        <input
-          className="text-center w-full h-full rounded-b-lg"
-          type="number"
-          max="99"
-          value={combatStats.profBonus}
-          onChange={(e) => {
-            const value = e.target.value;
-            setCombatStats({
-              ...combatStats,
-              profBonus: value === `` ? null : parseInt(e.target.value),
-            });
-          }}
-          onFocus={selectContent}
-          onKeyDown={clearFocus}
-        />
+        <form>
+          <input
+            className="text-center w-full h-full rounded-b-lg"
+            type="number"
+            max="99"
+            value={combatStats.profBonus}
+            onChange={(e) => {
+              const value = e.target.value;
+              setCombatStats({
+                ...combatStats,
+                profBonus: value === `` ? null : parseInt(e.target.value),
+              });
+            }}
+            onFocus={selectContent}
+            onKeyDown={clearFocus}
+          />
+        </form>
       </div>
 
       {/* <div className="grid grid-cols-3 grid-rows-2 bg-red-700 rounded-lg shadow-xl m-1">
@@ -153,40 +320,44 @@ function Combat() {
               Current
             </div>
 
-            <input
-              className="text-center h-full w-full rounded-bl-lg"
-              type="number"
-              value={combatStats.currentHP}
-              onChange={(e) => {
-                const value = e.target.value;
-                setCombatStats({
-                  ...combatStats,
-                  currentHP: value === `` ? null : parseInt(e.target.value),
-                });
-              }}
-              onFocus={selectContent}
-              onKeyDown={clearFocus}
-            />
+            <form>
+              <input
+                className="text-center h-full w-full rounded-bl-lg"
+                type="number"
+                value={combatStats.currentHP}
+                onChange={(e) => {
+                  const value = e.target.value;
+                  setCombatStats({
+                    ...combatStats,
+                    currentHP: value === `` ? null : parseInt(e.target.value),
+                  });
+                }}
+                onFocus={selectContent}
+                onKeyDown={clearFocus}
+              />
+            </form>
           </div>
 
           <div className="flex flex-col h-auto grid-rows-2 text-center border-l-[1px] align-middle">
             <div className="flex flex-col h-full my-auto max-h-6 text-sm text-center align-middle">
               Max
             </div>
-            <input
-              className="text-center h-full w-full rounded-br-lg"
-              type="number"
-              value={combatStats.maxHP}
-              onChange={(e) => {
-                const value = e.target.value;
-                setCombatStats({
-                  ...combatStats,
-                  maxHP: value === `` ? null : parseInt(e.target.value),
-                });
-              }}
-              onFocus={selectContent}
-              onKeyDown={clearFocus}
-            />
+            <form>
+              <input
+                className="text-center h-full w-full rounded-br-lg"
+                type="number"
+                value={combatStats.maxHP}
+                onChange={(e) => {
+                  const value = e.target.value;
+                  setCombatStats({
+                    ...combatStats,
+                    maxHP: value === `` ? null : parseInt(e.target.value),
+                  });
+                }}
+                onFocus={selectContent}
+                onKeyDown={clearFocus}
+              />
+            </form>
           </div>
         </div>
       </div>

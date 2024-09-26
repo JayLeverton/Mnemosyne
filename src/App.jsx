@@ -26,11 +26,12 @@ function App() {
   });
 
   const [combatStats, setCombatStats] = useState({
-    AC: 10,
+    initiative: 5,
+    AC: 15,
     currentHP: 10,
     maxHP: 50,
     profBonus: 3,
-    speeds: { walking: 30, flying: 0, swimming: 0, burrowing: 0, misc: 0 },
+    speeds: { walk: 30, fly: 0, swim: 0, climb: 0, burrow: 0, misc: 0 },
     maxHitDie: { d6: 0, d8: 0, d10: 0, d12: 0 },
     currentHitDie: { d6: 0, d8: 0, d10: 0, d12: 0 },
   });
@@ -121,7 +122,7 @@ function App() {
       d10: 0,
       d12: 0,
     },
-    initiative: 0,
+    initiative: 5,
     spellSaveDC: 0,
     spellAtt: 0,
   });
