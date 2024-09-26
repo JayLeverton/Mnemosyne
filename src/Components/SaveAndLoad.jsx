@@ -47,12 +47,12 @@ function SaveAndLoad({ save, load }) {
       currentHitDie: { d6: 0, d8: 0, d10: 0, d12: 0 },
     });
     setBackgroundStats({
-      characterName: "Placeholder McGee",
-      race: "Code Monkey",
-      alignment: "Lawful Good",
-      background: "Procrastinator",
-      experiencePoints: 28,
-      classLevels: [{ Barbarian: 5 }, { Fighter: 1 }],
+      characterName: "",
+      race: "",
+      alignment: "",
+      background: "",
+      experiencePoints: 0,
+      classLevels: [],
       subclassLevels: {},
     });
     setProficiencies({

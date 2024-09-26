@@ -51,15 +51,18 @@ function App() {
     return savedStats
       ? JSON.parse(savedStats)
       : {
-          characterName: "Placeholder McGee",
-          race: "Code Monkey",
-          alignment: "Lawful Good",
-          background: "Procrastinator",
-          experiencePoints: 28,
-          classLevels: [{ Barbarian: 5 }, { Fighter: 1 }],
+          characterName: "",
+          race: "",
+          alignment: "",
+          background: "",
+          experiencePoints: 0,
+          classLevels: [],
           subclassLevels: {},
         };
   });
+
+  // reminder that classLevels should be an array of objects, e.g.
+  // classLevels: [{ Barbarian: 5 }, { Fighter: 1 }],
 
   //
   // Allow the user to add their own custom defined classes instead of constraining to a set list of classes.
