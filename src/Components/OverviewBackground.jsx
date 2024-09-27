@@ -11,18 +11,18 @@ function OverviewBackground() {
       {/* OverviewBackground. Includes character name, class & level, OverviewBackground, player name, race, alignment, and experience points. */}
       <div
         id="OverviewBackground"
-        className="grid grid-cols-subgrid grid-rows-2 bg-black rounded-lg shadow-xl min-h-[50px] row-span-2 col-span-2"
+        className="grid grid-cols-subgrid grid-rows-2 rounded-lg shadow-xl min-h-[50px] row-span-2 col-span-2"
       >
         <div
           id="characterName"
-          className="grid bg-gray-500 rounded-lg shadow-xl min-h-[50px] m-1 text-center"
+          className="grid bg-slate-600 rounded-lg shadow-xl min-h-[50px] m-1 text-center"
         >
           <div id="" className="text-center text-xs max-h-3 my-0.5">
             Character Name
           </div>
 
           <input
-            className="flex w-full text-center bg-gray-500 border-[1px] rounded-b-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="flex w-full text-center rounded-b-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             value={backgroundStats.characterName}
             onChange={(e) => {
               setBackgroundStats({
@@ -35,14 +35,14 @@ function OverviewBackground() {
 
         <div
           id="race"
-          className="grid bg-gray-500 rounded-lg shadow-xl min-h-[50px] m-1 "
+          className="grid bg-slate-600 rounded-lg shadow-xl min-h-[50px] m-1 "
         >
           <div id="" className="text-center text-xs max-h-3 my-0.5">
             Race
           </div>
 
           <input
-            className="flex w-full text-center bg-gray-500 border-[1px] rounded-b-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="flex w-full text-center  rounded-b-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             value={backgroundStats.race}
             onChange={(e) => {
               setBackgroundStats({
@@ -55,7 +55,7 @@ function OverviewBackground() {
 
         <div
           id="classAndLevel"
-          className="grid bg-gray-500 rounded-lg shadow-xl min-h-[50px] m-1"
+          className="grid bg-slate-600 rounded-lg shadow-xl min-h-[50px] m-1"
         >
           <div id="" className="text-center text-xs max-h-3 my-0.5">
             Class Levels
@@ -65,7 +65,7 @@ function OverviewBackground() {
           {/* I must create a modal dialog box to handle the inputting and subtraction of classes!
               This modal must appear when the user taps the "Class Levels" field. */}
           <input
-            className="flex w-full text-center bg-gray-500 border-[1px] rounded-b-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="flex w-full text-center  rounded-b-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             value={backgroundStats.classLevels}
             onChange={(e) => {
               setBackgroundStats({
@@ -78,14 +78,14 @@ function OverviewBackground() {
 
         <div
           id="alignment"
-          className="grid bg-gray-500 rounded-lg shadow-xl min-h-[50px] m-1 "
+          className="grid bg-slate-600 rounded-lg shadow-xl min-h-[50px] m-1 "
         >
           <div id="" className="text-center text-xs max-h-3 my-0.5">
             Alignment
           </div>
 
           <input
-            className="flex w-full text-center bg-gray-500 border-[1px] rounded-b-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="flex w-full text-center  rounded-b-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             value={backgroundStats.alignment}
             onChange={(e) => {
               setBackgroundStats({
@@ -98,14 +98,14 @@ function OverviewBackground() {
 
         <div
           id="background"
-          className="grid bg-gray-500 rounded-lg shadow-xl min-h-[50px] m-1 text-center"
+          className="grid bg-slate-600 rounded-lg shadow-xl min-h-[50px] m-1 text-center"
         >
           <div id="" className="text-center text-xs max-h-3 my-0.5">
             Background
           </div>
 
           <input
-            className="flex w-full text-center bg-gray-500 border-[1px] rounded-b-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="flex w-full text-center  rounded-b-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             value={backgroundStats.background}
             onChange={(e) => {
               setBackgroundStats({
@@ -118,14 +118,14 @@ function OverviewBackground() {
 
         <div
           id="experience"
-          className="grid bg-gray-500 rounded-lg shadow-xl min-h-[50px] m-1 "
+          className="grid bg-slate-600 rounded-lg shadow-xl min-h-[50px] m-1 "
         >
           <div id="" className="text-center text-xs max-h-3 my-0.5">
             Experience Points
           </div>
 
           <input
-            className="flex w-full text-center bg-gray-500 border-[1px] rounded-b-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="flex w-full text-center  rounded-b-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             value={backgroundStats.experiencePoints}
             onChange={(e) => {
               setBackgroundStats({

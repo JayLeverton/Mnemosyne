@@ -32,6 +32,8 @@ function Combat() {
 
   return (
     <div className="grid h-auto grid-flow-col-dense grid-cols-6 col-span-2 rounded-lg shadow-xl">
+      {/*  */}
+      {/* Initiative */}
       <div className="grid h-auto row-start-1 col-span-2 bg-red-700 rounded-lg shadow-xl m-1">
         <div className="text-center text-xs max-h-3 my-0.5">Initiative</div>
 
@@ -54,8 +56,12 @@ function Combat() {
         </form>
       </div>
 
+      {/*  */}
+      {/* Speeds */}
       <div className="grid row-start-1 row-span-2 h-auto col-span-2 bg-red-700 rounded-lg shadow-xl m-1">
-        <div className="text-center text-xs max-h-3 my-0.5 mb-[0.55rem]">Speeds</div>
+        <div className="text-center text-xs max-h-3 my-0.5 mb-[0.55rem]">
+          Speeds
+        </div>
         <div className="flex text-xs justify-between">
           <div className="text-left pl-1">Walk: </div>{" "}
           <form>
@@ -196,6 +202,8 @@ function Combat() {
         </div>
       </div>
 
+      {/*  */}
+      {/* AC */}
       <div className="grid h-auto row-start-1 col-span-2 bg-red-700 rounded-lg shadow-xl m-1">
         <div id="" className="text-center text-xs max-h-3 my-0.5">
           AC
@@ -220,6 +228,8 @@ function Combat() {
         </form>
       </div>
 
+      {/*  */}
+      {/* Hit Die */}
       <div className="grid h-auto row-start-2 col-span-2 bg-red-700 rounded-lg shadow-xl m-1">
         <div id="" className="text-center text-xs max-h-3 my-0.5">
           Hit Die
@@ -228,6 +238,8 @@ function Combat() {
         <div className="text-center">5d12 / 1d10</div>
       </div>
 
+      {/*  */}
+      {/* Proficiency Bonus */}
       <div className="grid h-auto row-start-2 col-start-5 col-span-2 bg-red-700 rounded-lg shadow-xl m-1">
         <div id="" className="text-center text-xs max-h-3 my-0.5">
           Prof. Bonus
@@ -252,19 +264,8 @@ function Combat() {
         </form>
       </div>
 
-      {/* <div className="grid grid-cols-3 grid-rows-2 bg-red-700 rounded-lg shadow-xl m-1">
-        <div className="grid col-span-3 grid-flow-col ">
-          <button className="grid row-span-2 border-2">-1</button>
-          <div id="" className="text-center text-xs max-h-3 my-0.5">
-            HP
-          </div>
-          <button className="grid grid-flow-row row-span-2 border-2">+1</button>
-        </div>
-        <div className="text-center grid col-span-3 mx-auto align-middle border-2">
-          55 / 63
-        </div>
-      </div> */}
-
+      {/*  */}
+      {/* HP */}
       <div className="grid max-w-96 place-self-center h-auto border-white border-[1px] row-start-3 col-start-2 align-middle row-span-2 col-span-4 grid-cols-3 grid-rows-2 bg-red-700 rounded-lg shadow-xl m-1">
         <div className="grid h-auto col-span-3 grid-cols-3 border-b-[1px]">
           <button
@@ -359,64 +360,6 @@ function Combat() {
           </div>
         </div>
       </div>
-
-      {/* <div className="grid border-white border-[1px] row-start-3 col-start-2 align-middle row-span-2 col-span-4 grid-cols-3 grid-rows-2 bg-red-700 rounded-lg shadow-xl m-1">
-        <div className="grid col-span-3 grid-cols-8">
-          <button className="col-span-3 border-r-[1px] border-b-[1px] rounded-tl-lg">
-            -1
-          </button>
-          <div className="grid col-span-2 grid-rows-2 h-full">
-            <div id="" className="col-start-1 text-center h-full text-lg">
-              HP
-            </div>
-            <div className="flex max-h-8 mx-auto justify-center">
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                className="flex h-full mx-auto"
-              >
-                <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
-                <g
-                  id="SVGRepo_tracerCarrier"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                ></g>
-                <g id="SVGRepo_iconCarrier">
-                  {" "}
-                  <path
-                    fill-rule="evenodd"
-                    clip-rule="evenodd"
-                    d="M12 6.00019C10.2006 3.90317 7.19377 3.2551 4.93923 5.17534C2.68468 7.09558 2.36727 10.3061 4.13778 12.5772C5.60984 14.4654 10.0648 18.4479 11.5249 19.7369C11.6882 19.8811 11.7699 19.9532 11.8652 19.9815C11.9483 20.0062 12.0393 20.0062 12.1225 19.9815C12.2178 19.9532 12.2994 19.8811 12.4628 19.7369C13.9229 18.4479 18.3778 14.4654 19.8499 12.5772C21.6204 10.3061 21.3417 7.07538 19.0484 5.17534C16.7551 3.2753 13.7994 3.90317 12 6.00019Z"
-                    stroke="#000000"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  ></path>{" "}
-                </g>
-              </svg>
-            </div>
-          </div>
-          <button className="col-span-3 border-l-[1px] border-b-[1px] rounded-tr-lg">
-            +1
-          </button>
-        </div>
-        <div className="grid grid-cols-7 col-span-3 grid-flow-col">
-          <input
-            className="text-center col-span-3 align-middle rounded-bl-lg"
-            type="number"
-            value={combatStats.currentHP}
-          />
-
-          <div className="flex items-center text-center mx-auto">/</div>
-
-          <input
-            className="text-center row col-span-3 align-middle rounded-br-lg"
-            type="number"
-            value={combatStats.maxHP}
-          />
-        </div>
-      </div> */}
     </div>
   );
 }

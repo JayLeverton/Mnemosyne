@@ -59,7 +59,7 @@ function DiceRoller() {
   //
   // Dice button functions
   const updateFormulaWithDice = (tempRollFormula, sides) => {
-    const diceRegex = new RegExp(`(\\d*)d${sides}`);
+    const diceRegex = new RegExp(`\\b(\\d*)d${sides}\\b`);
     const match = tempRollFormula.match(diceRegex);
 
     if (match) {
@@ -85,11 +85,19 @@ function DiceRoller() {
   // Full roll function
   const rollDice = (formula) => {
     const diceRegex = /(\d*)d(\d+)(kh\d+|dl\d+)?/g;
-    const parts = [...formula.matchAll(diceRegex)];
+    const operatorRegex = /([+-]\s*\d+)/g;
+
+    const diceParts = [...formula.matchAll(diceRegex)];
+
+    const formulaWithoutDice = formula.replace(diceRegex, "");
+
+    const operatorParts = formulaWithoutDice.match(operatorRegex) || [];
+
     const results = [];
     let totalSum = 0;
+    let operationSum = 0;
 
-    parts.forEach((part) => {
+    diceParts.forEach((part) => {
       const count = part[1] === "" ? 1 : parseInt(part[1], 10); // How many dice to roll
       const sides = parseInt(part[2], 10); // Dice sides
       let rolls = [];
@@ -119,6 +127,7 @@ function DiceRoller() {
       totalSum += sum;
 
       results.push({
+        type: "dice",
         dice: `d${sides}`,
         originalRolls,
         rolls,
@@ -126,17 +135,31 @@ function DiceRoller() {
       });
     });
 
+    operatorParts.forEach((operation) => {
+      const value = parseInt(operation.replace(/\s+/g, ""), 10);
+      operationSum += value;
+      totalSum += value;
+
+      results.push({
+        type: "operation",
+        value,
+      });
+    });
     let summands = results.map((result) => {
-      return result.originalRolls.join("]+[");
+      if (result.type === "dice") {
+        return `${result.originalRolls.join("]+[")}`;
+      } else if (result.type === "operation") {
+        return result.value > 0 ? `+${result.value}` : `${result.value}`;
+      }
     });
 
     return { totalSum, results, summands };
   };
 
   return (
-    <div className="fixed overscroll-contain grid-rows-3 w-7/12 right-0 bottom-0 m-2 h-[26rem] bg-slate-800 opacity-[99%]">
+    <div className="fixed overscroll-contain grid-rows-3 w-[61%] right-0 bottom-0 m-2 h-[34rem] bg-slate-800 opacity-[99%]">
       <div className="flex flex-col h-full">
-        <div className="sticky top-0 grid grid-rows-1 grid-cols-7 h-8 border-b-2 border-black w-full gap-x-0.5">
+        <div className="sticky top-0 grid auto-rows-auto grid-rows-2 grid-cols-4 h-26 border-b-2 border-black w-full">
           <DieButton
             diceSides="4"
             setTempRollFormula={setTempRollFormula}
@@ -167,7 +190,15 @@ function DiceRoller() {
             setTempRollFormula={setTempRollFormula}
             handleDiceClick={handleDiceClick}
           ></DieButton>
-          <button className="bg-black" onClick={setDiceRollerFalse}>
+          <DieButton
+            diceSides="100"
+            setTempRollFormula={setTempRollFormula}
+            handleDiceClick={handleDiceClick}
+          ></DieButton>
+          <button
+            className="border-[1px] bg-slate-900"
+            onClick={setDiceRollerFalse}
+          >
             <CloseSVG />
           </button>
         </div>
@@ -188,7 +219,7 @@ function DiceRoller() {
         </div>
         <input
           id="formulaInput"
-          className="flex pl-2 min-h-8 h-8 border-[1px] bg-gray-800 border-white placeholder-gray-500"
+          className="flex text-sm pl-2 min-h-8 h-8 border-[1px] bg-gray-800 border-white placeholder-gray-500"
           value={tempRollFormula}
           onChange={(e) => setTempRollFormula(e.target.value)}
           onKeyDown={handleKeyDown}
