@@ -1,8 +1,17 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { combatStatsContext } from "../Context";
+import HitDie from "./HitDie";
+import { createPortal } from "react-dom";
+import HitDieModal from "./HitDieModal";
 
 function Combat() {
   const { combatStats, setCombatStats } = useContext(combatStatsContext);
+  const [showHitDieModal, setShowHitDieModal] = useState(false);
+
+  useEffect(() => {
+    // Expose combatStats to the global window object
+    window.combatStats = combatStats;
+  }, [combatStats]);
 
   const incrementHP = () => {
     setCombatStats((prevCombatStats) => ({
@@ -231,11 +240,28 @@ function Combat() {
       {/*  */}
       {/* Hit Die */}
       <div className="grid h-auto row-start-2 col-span-2 bg-red-700 rounded-lg shadow-xl m-1">
-        <div id="" className="text-center text-xs max-h-3 my-0.5">
-          Hit Die
+        <div className="flex w-full relative mt-1">
+          <div className="absolute left-1/2 transform -translate-x-1/2 text-xs max-h-3">
+            Hit Die
+          </div>
+          <button
+            className="ml-auto mr-1 rounded border-[1px] bg-slate-950 h-6 w-6"
+            onClick={() => setShowHitDieModal(true)}
+          ></button>
+          {createPortal(
+            <HitDieModal
+              showHitDieModal={showHitDieModal}
+              setShowHitDieModal={setShowHitDieModal}
+            ></HitDieModal>,
+            document.body
+          )}
         </div>
-
-        <div className="text-center">5d12 / 1d10</div>
+        <div className="grid h-full">
+          <HitDie
+            showHitDieModal={showHitDieModal}
+            setShowHitDieModal={setShowHitDieModal}
+          ></HitDie>
+        </div>
       </div>
 
       {/*  */}

@@ -41,8 +41,8 @@ function App() {
           maxHP: 0,
           profBonus: 2,
           speeds: { walk: 30, fly: 0, swim: 0, climb: 0, burrow: 0, misc: 0 },
-          maxHitDie: { d6: 0, d8: 0, d10: 0, d12: 0 },
           currentHitDie: { d6: 0, d8: 0, d10: 0, d12: 0 },
+          maxHitDie: { d6: 0, d8: 0, d10: 0, d12: 0 },
         };
   });
 
