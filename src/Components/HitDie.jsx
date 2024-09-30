@@ -103,8 +103,8 @@ const HitDie = ({ showHitDieModal, setShowHitDieModal }) => {
                   >
                     -
                   </button>
-                  <div className="flex text-center justify-center bg-zinc-900 px-1 mx-1">
-                    {value}/{combatStats.maxHitDie[key]}
+                  <div className="flex text-center justify-center bg-zinc-900 px-1">
+                    {value} / {combatStats.maxHitDie[key]}
                   </div>
                   <button
                     className="w-6 h-6 mx-1 border-[1px] text-center bg-slate-950"

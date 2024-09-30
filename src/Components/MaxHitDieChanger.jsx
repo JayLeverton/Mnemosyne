@@ -19,7 +19,10 @@ const MaxHitDieChanger = ({ operation, hitDie }) => {
       ...prevCombatStats,
       maxHitDie: {
         ...prevCombatStats.maxHitDie,
-        [hitDie]: prevCombatStats.maxHitDie[hitDie] + 1,
+        [hitDie]:
+          prevCombatStats.maxHitDie[hitDie] < 99
+            ? prevCombatStats.maxHitDie[hitDie] + 1
+            : prevCombatStats.maxHitDie[hitDie],
       },
     }));
   };

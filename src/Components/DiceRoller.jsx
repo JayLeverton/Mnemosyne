@@ -85,7 +85,7 @@ function DiceRoller() {
   // Full roll function
   const rollDice = (formula) => {
     const diceRegex = /(\d*)d(\d+)(kh\d+|dl\d+)?/g;
-    const operatorRegex = /([+-]\s*\d+)/g;
+    const operatorRegex = /([+\-*/]?\s*\d+)/g;
 
     const diceParts = [...formula.matchAll(diceRegex)];
 
@@ -135,21 +135,49 @@ function DiceRoller() {
       });
     });
 
-    operatorParts.forEach((operation) => {
-      const value = parseInt(operation.replace(/\s+/g, ""), 10);
-      operationSum += value;
-      totalSum += value;
+    // Handle arithmetic operations
+    operatorParts.forEach((operation, index) => {
+      let operator = operation.trim()[0];
+      let value = parseInt(operation.replace(/[+\-*/]/, "").trim(), 10);
 
-      results.push({
-        type: "operation",
-        value,
-      });
+      // First number should not have an operator and should only be added once
+      if (index === 0 && !/[+\-*/]/.test(operator)) {
+        totalSum += value; // Directly add the value
+        results.push({
+          type: "operation",
+          value: `${value}`,
+        });
+      } else {
+        switch (operator) {
+          case "+":
+            totalSum += value;
+            break;
+          case "-":
+            totalSum -= value;
+            break;
+          case "*":
+            totalSum *= value;
+            break;
+          case "/":
+            totalSum = Math.floor(totalSum / value); // Integer division
+            break;
+          default:
+            break;
+        }
+
+        results.push({
+          type: "operation",
+          value: `${operator}${value}`,
+        });
+      }
     });
+
+    // Prepare summands, correctly formatting dice and operations
     let summands = results.map((result) => {
       if (result.type === "dice") {
         return `${result.originalRolls.join("]+[")}`;
       } else if (result.type === "operation") {
-        return result.value > 0 ? `+${result.value}` : `${result.value}`;
+        return result.value;
       }
     });
 
@@ -223,7 +251,7 @@ function DiceRoller() {
           value={tempRollFormula}
           onChange={(e) => setTempRollFormula(e.target.value)}
           onKeyDown={handleKeyDown}
-          placeholder='4d6dl or "/help"'
+          placeholder="4d6 or 73-37 or 10d52+29"
           ref={formulaInputRef}
         ></input>
       </div>
