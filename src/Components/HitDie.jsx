@@ -1,35 +1,120 @@
 import React, { useContext, useState } from "react";
-import { combatStatsContext } from "../Context";
+import {
+  abilityScoresContext,
+  combatStatsContext,
+  diceRollerVisibilityContext,
+  diceRollInstancesContext,
+} from "../Context";
 
 const HitDie = ({ showHitDieModal, setShowHitDieModal }) => {
   const { combatStats, setCombatStats } = useContext(combatStatsContext);
+  const { diceRollInstances, setDiceRollInstances } = useContext(
+    diceRollInstancesContext
+  );
+  const { setDiceRollerFalse, setDiceRollerTrue } = useContext(
+    diceRollerVisibilityContext
+  );
+  const { abilityScores, setAbilityScores } = useContext(abilityScoresContext);
+
+  const incrementHitDie = (key) => {
+    if (combatStats.currentHitDie[key] < combatStats.maxHitDie[key]) {
+      setCombatStats((prevCombatStats) => ({
+        ...prevCombatStats,
+        currentHitDie: {
+          ...prevCombatStats.currentHitDie,
+          [key]: prevCombatStats.currentHitDie[key] + 1,
+        },
+      }));
+    } else {
+      console.log(
+        "You currently have " +
+          combatStats.currentHitDie[key] +
+          " " +
+          key +
+          " hit dice"
+      );
+    }
+  };
+
+  const decrementHitDie = (key) => {
+    if (combatStats.currentHitDie[key] > 0) {
+      setCombatStats((prevCombatStats) => ({
+        ...prevCombatStats,
+        currentHitDie: {
+          ...prevCombatStats.currentHitDie,
+          [key]: prevCombatStats.currentHitDie[key] - 1,
+        },
+      }));
+      rollHitDie(key);
+      setDiceRollerTrue();
+    } else {
+      console.log(
+        "You currently have " +
+          combatStats.currentHitDie[key] +
+          " " +
+          key +
+          " hit dice"
+      );
+    }
+  };
+
+  const addDiceRollInstance = (rollType, result, tempRoll, scoreModifier) => {
+    setDiceRollInstances((prevInstances) => [
+      { rollType, result, tempRoll, scoreModifier },
+      ...prevInstances,
+    ]);
+  };
+
+  const rollHitDie = (key) => {
+    const sidesInt = parseInt(key.replace(/d/g, ""));
+    const hitDieRoll = Math.floor(Math.random() * sidesInt) + 1;
+    const hitDieRollResult =
+      hitDieRoll + Math.floor((abilityScores.Constitution - 10) / 2);
+
+    addDiceRollInstance(
+      `${key} Hit Die`,
+      hitDieRollResult,
+      hitDieRoll,
+      Math.floor((abilityScores.Constitution - 10) / 2)
+    );
+  };
 
   return (
-    <div className="grid text-center m-1 text-sm">
-      {/*  */}
-      {/* Actual code */}
+    <div className="grid text-center m-1">
       {Object.entries(combatStats.currentHitDie).map(([key, value]) => {
         //
         // Only render if maxValue is greater than 0
-        // combatStats.maxHitDie[key] > 0
         if (combatStats.maxHitDie[key] > 0) {
           return (
             <div
-              className="flex justify-evenly relative mb-[0.05rem]"
+              className="flex flex-col justify-evenly relative mb-1"
               key={key}
             >
-              <div className="flex mr-auto text-center justify-start">
+              <div className="flex mx-auto text-center justify-start font-bold text-sm my-auto">
                 {key}:
               </div>
-              <div className="grid absolute left-1/2 transform -translate-x-1/2 text-center justify-self-center">
+              <div className="grid place-items-center text-center justify-self-center">
                 <div className="grid grid-flow-col">
-                  <button className="w-5 h-5 border-[1px] bg-slate-950 self-center"></button>
-                  {value}
-                  <button className="w-5 h-5 border-[1px] bg-slate-950 self-center"></button>
+                  <button
+                    className="w-6 h-6 mx-1 border-[1px] text-center bg-slate-950"
+                    onClick={() => {
+                      decrementHitDie(key);
+                    }}
+                  >
+                    -
+                  </button>
+                  <div className="flex text-center justify-center bg-zinc-900 px-1 mx-1">
+                    {value}/{combatStats.maxHitDie[key]}
+                  </div>
+                  <button
+                    className="w-6 h-6 mx-1 border-[1px] text-center bg-slate-950"
+                    onClick={() => {
+                      incrementHitDie(key);
+                    }}
+                  >
+                    +
+                  </button>
                 </div>
-              </div>
-              <div className="flex text-center justify-self-end">
-                /{combatStats.maxHitDie[key]}
               </div>
             </div>
           );

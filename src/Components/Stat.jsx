@@ -26,28 +26,9 @@ function Stat({ stat, subStats, statColor }) {
 
   const scoreModifier = Math.floor((abilityScores[stat] - 10) / 2);
 
-  const addToRollsArray = (rollType, result, formula) => {};
-
   const rollXSidedDice = (x) => {
     return Math.floor(Math.random() * x) + 1;
   };
-
-  // const getRollInstanceString = () => {
-  //   let tempRoll = rollXSidedDice(20);
-  //   let tempRollFormula = `${tempRoll} + ${scoreModifier}`;
-  //   let scoreModifierString =
-  //     scoreModifier >= 0 ? `+${scoreModifier}` : `${scoreModifier}`;
-  //   return (
-  //     stat +
-  //     ": " +
-  //     (tempRoll + scoreModifier) +
-  //     " [" +
-  //     "" +
-  //     tempRoll +
-  //     "] " +
-  //     scoreModifierString.replaceAll(/([+\-])(\d)/g, `$1 $2`)
-  //   );
-  // };
 
   const addDiceRollInstance = (rollType, result, tempRoll, scoreModifier) => {
     setDiceRollInstances((prevInstances) => [

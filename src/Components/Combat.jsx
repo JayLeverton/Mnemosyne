@@ -240,14 +240,12 @@ function Combat() {
       {/*  */}
       {/* Hit Die */}
       <div className="grid h-auto row-start-2 col-span-2 bg-red-700 rounded-lg shadow-xl m-1">
-        <div className="flex w-full relative mt-1">
-          <div className="absolute left-1/2 transform -translate-x-1/2 text-xs max-h-3">
-            Hit Die
-          </div>
+        <div className="flex w-full mt-1">
+          
           <button
-            className="ml-auto mr-1 rounded border-[1px] bg-slate-950 h-6 w-6"
+            className="rounded justify-center text-center text-sm mx-auto p-1 border-[1px] bg-slate-950"
             onClick={() => setShowHitDieModal(true)}
-          ></button>
+          >Hit Die</button>
           {createPortal(
             <HitDieModal
               showHitDieModal={showHitDieModal}

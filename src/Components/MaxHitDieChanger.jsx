@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { combatStatsContext } from "../Context";
 
-const HitDieChanger = ({ operation, hitDie }) => {
+const MaxHitDieChanger = ({ operation, hitDie }) => {
   const { combatStats, setCombatStats } = useContext(combatStatsContext);
 
   const decrementHitDie = () => {
@@ -32,7 +32,6 @@ const HitDieChanger = ({ operation, hitDie }) => {
     }
   };
 
-
   return (
     <div>
       <button className="" onClick={handleClick}>
@@ -42,4 +41,4 @@ const HitDieChanger = ({ operation, hitDie }) => {
   );
 };
 
-export default HitDieChanger;
+export default MaxHitDieChanger;
