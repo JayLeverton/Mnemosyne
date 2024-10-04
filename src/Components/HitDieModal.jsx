@@ -26,7 +26,7 @@ function HitDieModal({ showHitDieModal, setShowHitDieModal }) {
                     {/*  */}
                     {/* hit die */}
                     <div className="grid place-items-center mb-4">
-                      <div className=" font-bold">d6:</div>
+                      <div className="font-bold">d6:</div>
                       <p className="w-3/6 text-xs mb-1 text-slate-300">
                         sorcerers, wizards
                       </p>
@@ -79,7 +79,7 @@ function HitDieModal({ showHitDieModal, setShowHitDieModal }) {
 
                     {/*  */}
                     {/* hit die */}
-                    <div className="grid place-items-center mb-4">
+                    <div className="grid">
                       <div className=" font-bold">d10:</div>
                       <p className="w-3/6 text-xs mb-1 text-slate-300">
                         fighters, paladins, rangers
@@ -105,8 +105,8 @@ function HitDieModal({ showHitDieModal, setShowHitDieModal }) {
 
                     {/*  */}
                     {/* hit die */}
-                    <div className="grid place-items-center ">
-                      <div className=" font-bold">d12:</div>
+                    <div className="grid  ">
+                      <div className="font-bold">d12:</div>
                       <p className="w-3/6 text-xs mb-1 text-slate-300">
                         barbarians
                       </p>
