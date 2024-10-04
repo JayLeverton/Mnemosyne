@@ -9,6 +9,20 @@ function Combat() {
   const [showHitDieModal, setShowHitDieModal] = useState(false);
 
   useEffect(() => {
+    // Disable body scroll when modal is open
+    if (showHitDieModal) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+
+    // Clean up when the component unmounts or modal closes
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, [showHitDieModal]);
+
+  useEffect(() => {
     // Expose combatStats to the global window object
     window.combatStats = combatStats;
   }, [combatStats]);
@@ -241,11 +255,12 @@ function Combat() {
       {/* Hit Die */}
       <div className="grid h-auto row-start-2 col-span-2 bg-red-700 rounded-lg shadow-xl m-1">
         <div className="flex w-full mt-1">
-          
           <button
             className="rounded justify-center text-center text-sm mx-auto p-1 border-[1px] bg-slate-950"
             onClick={() => setShowHitDieModal(true)}
-          >Hit Die</button>
+          >
+            Hit Die
+          </button>
           {createPortal(
             <HitDieModal
               showHitDieModal={showHitDieModal}

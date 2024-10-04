@@ -6,10 +6,10 @@ function HitDieModal({ showHitDieModal, setShowHitDieModal }) {
   const { combatStats, setCombatStats } = useContext(combatStatsContext);
 
   return (
-    <div>
+    <div className="overscroll-contain">
       {showHitDieModal ? (
         <>
-          <div className="opacity-30 fixed inset-0 z-40 bg-black"></div>
+          <div className="backdrop-blur-sm absolute min-h-[300rem] inset-0 z-40"></div>
           <div
             className="flex justify-center items-center overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none"
             onClick={() => setShowHitDieModal(false)}
