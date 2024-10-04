@@ -1,8 +1,5 @@
-# React + Vite
+# Mnemosyne
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is a free character sheet web app to help users play D&D 5e by managing their character stats, resources, and rolls. Characters are saved locally upon any change and can also be saved to file, allowing users to play with multiple characters as well as on on other devices. 
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+[Live Site](https://jayleverton.github.io/Mnemosyne/)
