@@ -22,7 +22,7 @@ function HitDieModal({ showHitDieModal, setShowHitDieModal }) {
                 </div>
                 {/*body*/}
                 <div className="flex flex-col w-full">
-                  <div className="grid text-lg flex-col w-full h-full text-center">
+                  <div className="grid text-lg flex-col text-center">
                     {/*  */}
                     {/* hit die */}
                     <div className="grid place-items-center mb-4">
@@ -79,7 +79,7 @@ function HitDieModal({ showHitDieModal, setShowHitDieModal }) {
 
                     {/*  */}
                     {/* hit die */}
-                    <div className="grid">
+                    <div className="grid place-items-center mb-4">
                       <div className=" font-bold">d10:</div>
                       <p className="w-3/6 text-xs mb-1 text-slate-300">
                         fighters, paladins, rangers
@@ -105,7 +105,7 @@ function HitDieModal({ showHitDieModal, setShowHitDieModal }) {
 
                     {/*  */}
                     {/* hit die */}
-                    <div className="grid  ">
+                    <div className="grid place-items-center ">
                       <div className="font-bold">d12:</div>
                       <p className="w-3/6 text-xs mb-1 text-slate-300">
                         barbarians
@@ -143,7 +143,7 @@ function HitDieModal({ showHitDieModal, setShowHitDieModal }) {
               </div>
             </div>
           </div>
-          <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
+          {/* <div className="opacity-25 fixed inset-0 z-40 bg-black"></div> */}
         </>
       ) : null}
     </div>
