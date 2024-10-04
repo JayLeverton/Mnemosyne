@@ -17,11 +17,11 @@ function HitDieModal({ showHitDieModal, setShowHitDieModal }) {
               {/*content*/}
               <div className="flex flex-col rounded-lg shadow-lg bg-slate-800">
                 {/*header*/}
-                <div className="flex flex-col p-5 text-center mx-auto justify-center items-center">
+                <div className="flex flex-col p-5 text-center">
                   <h3 className="text-3xl font-semibold">Total Hit Dice</h3>
                 </div>
                 {/*body*/}
-                <div className="flex items-center flex-col w-full">
+                <div className="flex flex-col w-full">
                   <div className="grid text-lg flex-col w-full h-full text-center">
                     {/*  */}
                     {/* hit die */}
@@ -131,7 +131,7 @@ function HitDieModal({ showHitDieModal, setShowHitDieModal }) {
                   </div>
                 </div>
                 {/*footer*/}
-                <div className="flex items-center pb-8 pt-10 border-solid">
+                <div className="flex pb-8 pt-10">
                   <button
                     className="text-red-500 mx-auto background-transparent font-bold text-lg ease-linear transition-all duration-150"
                     type="button"
