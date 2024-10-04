@@ -9,24 +9,28 @@ function HitDieModal({ showHitDieModal, setShowHitDieModal }) {
     <div>
       {showHitDieModal ? (
         <>
+          <div className="opacity-30 fixed inset-0 z-40 bg-black"></div>
           <div
             className="flex justify-center items-center overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none"
             onClick={() => setShowHitDieModal(false)}
           >
-            <div className="border-[1px]" onClick={(e) => e.stopPropagation()}>
+            <div
+              className="border-[1px] rounded-lg"
+              onClick={(e) => e.stopPropagation()}
+            >
               {/*content*/}
               <div className="flex flex-col rounded-lg shadow-lg bg-slate-800">
                 {/*header*/}
-                <div className="flex flex-col p-5 text-center">
+                <div className="flex flex-col p-5 text-center mx-auto justify-center items-center">
                   <h3 className="text-3xl font-semibold">Total Hit Dice</h3>
                 </div>
                 {/*body*/}
-                <div className="flex flex-col w-full">
-                  <div className="grid text-lg flex-col text-center">
+                <div className="flex items-center flex-col w-full">
+                  <div className="grid text-lg flex-col w-full h-full text-center">
                     {/*  */}
                     {/* hit die */}
                     <div className="grid place-items-center mb-4">
-                      <div className="font-bold">d6:</div>
+                      <div className=" font-bold">d6:</div>
                       <p className="w-3/6 text-xs mb-1 text-slate-300">
                         sorcerers, wizards
                       </p>
@@ -106,7 +110,7 @@ function HitDieModal({ showHitDieModal, setShowHitDieModal }) {
                     {/*  */}
                     {/* hit die */}
                     <div className="grid place-items-center ">
-                      <div className="font-bold">d12:</div>
+                      <div className=" font-bold">d12:</div>
                       <p className="w-3/6 text-xs mb-1 text-slate-300">
                         barbarians
                       </p>
@@ -131,9 +135,9 @@ function HitDieModal({ showHitDieModal, setShowHitDieModal }) {
                   </div>
                 </div>
                 {/*footer*/}
-                <div className="flex pb-8 pt-10">
+                <div className="flex items-center pb-8 pt-10">
                   <button
-                    className="text-red-500 mx-auto background-transparent font-bold text-lg ease-linear transition-all duration-150"
+                    className="text-red-500 mx-auto font-bold text-lg ease-linear transition-all duration-150"
                     type="button"
                     onClick={() => setShowHitDieModal(false)}
                   >
@@ -143,7 +147,6 @@ function HitDieModal({ showHitDieModal, setShowHitDieModal }) {
               </div>
             </div>
           </div>
-          {/* <div className="opacity-25 fixed inset-0 z-40 bg-black"></div> */}
         </>
       ) : null}
     </div>
